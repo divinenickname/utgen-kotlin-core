@@ -12,6 +12,10 @@ java.targetCompatibility = JavaVersion.VERSION_17
 java.sourceCompatibility = JavaVersion.VERSION_17
 
 dependencies {
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.10.2")
+    testImplementation("org.junit.jupiter:junit-jupiter-engine:5.10.2")
+    testImplementation("io.kotest:kotest-assertions-core-jvm:5.8.0")
+
     runtimeOnly("com.squareup:kotlinpoet:1.16.0")
 }
 
