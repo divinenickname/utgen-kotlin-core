@@ -12,7 +12,7 @@ java.targetCompatibility = JavaVersion.VERSION_17
 java.sourceCompatibility = JavaVersion.VERSION_17
 
 dependencies {
-
+    runtimeOnly("com.squareup:kotlinpoet:1.16.0")
 }
 
 repositories {
