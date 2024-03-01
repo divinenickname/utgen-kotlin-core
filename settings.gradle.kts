@@ -7,7 +7,7 @@
  * in the user manual at https://docs.gradle.org/7.1.1/userguide/multi_project_builds.html
  */
 
-rootProject.name = "template"
+rootProject.name = "utgen"
 
 pluginManagement {
     repositories {
