@@ -1,0 +1,44 @@
+version: '3.7'
+
+services:
+  template-project-db:
+    image: postgres:14.1-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=template-project
+    ports:
+      - '5433:5432'
+    networks:
+      - service-network
+    volumes:
+      - template-project-db:/var/lib/postgresql/data
+
+  template-project:
+    container_name: template-project-server
+#    build:
+#      context: .
+#      dockerfile: Dockerfile
+    image: template-project:1.0.${WEB_TAG}
+    depends_on:
+      - assessment-db
+    ports:
+      - "8081:8080"
+    networks:
+      - service-network
+    links:
+      - assessment-db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://template-project-db:5432/template-project
+      SPRING_DATASOURCE_USERNAME: ${DB_USER}
+      SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD}
+
+volumes:
+  assessment-db:
+    driver: local
+
+networks:
+  service-network:
+    driver: bridge
+    external: true

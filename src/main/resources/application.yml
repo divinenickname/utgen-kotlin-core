@@ -1,0 +1,9 @@
+spring:
+  application.name: template
+  jackson:
+    parser:
+      allow-unquoted-control-chars: true
+
+info:
+  application:
+    version: "#project.version#"

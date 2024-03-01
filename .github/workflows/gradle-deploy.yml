@@ -1,0 +1,46 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+# This workflow will build a Java project with Gradle and cache/restore any dependencies to improve the workflow execution time
+# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-gradle
+
+name: Deploy to vps
+
+on:
+  push:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: self-hosted
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      - name: Build with Gradle
+        run: ./gradlew clean build
+
+      - name: Build docker image
+        run: docker build -t assessment-server:1.0.${{github.run_number}} .
+
+  deploy:
+    needs: [build]
+    runs-on: self-hosted
+    steps:
+      - name: print pg password
+        run: echo ${{secrets.DB_PASSWORD}}
+      - name: docker-compose
+        run: >
+          WEB_TAG=${{github.run_number}} 
+          DB_USER=${{secrets.DB_USER}} 
+          DB_PASSWORD=${{secrets.DB_PASSWORD}} 
+          DEFAULT_TELEGRAM_ASSESSOR_PASSWORD=${{secrets.DEFAULT_TELEGRAM_ASSESSOR_PASSWORD}}
+          docker-compose up -d
