@@ -4,6 +4,7 @@ plugins {
     java
     idea
     kotlin("jvm") version "1.7.22"
+    id("antlr")
 }
 
 version = "0.1.0-SNAPSHOT"
@@ -12,6 +13,8 @@ java.targetCompatibility = JavaVersion.VERSION_17
 java.sourceCompatibility = JavaVersion.VERSION_17
 
 dependencies {
+    antlr("org.antlr:antlr4:4.13.1")
+
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.10.2")
     testImplementation("org.junit.jupiter:junit-jupiter-engine:5.10.2")
     testImplementation("io.kotest:kotest-assertions-core-jvm:5.8.0")
@@ -22,6 +25,7 @@ dependencies {
 repositories {
     mavenLocal()
     mavenCentral()
+    maven("https://jitpack.io")
 }
 
 tasks.withType<KotlinCompile> {
@@ -29,6 +33,13 @@ tasks.withType<KotlinCompile> {
         freeCompilerArgs = listOf("-Xjsr305=strict")
         jvmTarget = "17"
     }
+}
+tasks.withType<KotlinCompile>().configureEach {
+    dependsOn(tasks.withType<AntlrTask>())
+}
+
+tasks.withType<Jar>().configureEach {
+    dependsOn(tasks.withType<AntlrTask>())
 }
 
 tasks.withType<Test> {
