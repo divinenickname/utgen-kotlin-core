@@ -3,7 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     java
     idea
-    kotlin("jvm") version "1.7.22"
+    kotlin("jvm") version "1.9.22"
     id("antlr")
 }
 
@@ -19,7 +19,7 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-engine:5.10.2")
     testImplementation("io.kotest:kotest-assertions-core-jvm:5.8.0")
 
-    runtimeOnly("com.squareup:kotlinpoet:1.16.0")
+    implementation("com.squareup:kotlinpoet:1.16.0")
 }
 
 repositories {
