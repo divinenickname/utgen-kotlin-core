@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test
 import java.io.File
 
 class MethodExtractorTest {
-    val input = File("src/test/kotlin/org/ilinykh/kotlin/utgen/TestClass.kt").readText()
+    private val input = File("src/test/kotlin/org/ilinykh/kotlin/utgen/TestClass.kt").readText()
 
     @Test
     fun checkMethods() {
