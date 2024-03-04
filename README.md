@@ -1,4 +1,4 @@
-# Utgen
+# Utgen-core
 Simple unit-tests generator for Kotlin language.
 
 ## Features
