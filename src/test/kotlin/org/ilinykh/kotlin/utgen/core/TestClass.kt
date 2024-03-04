@@ -12,4 +12,10 @@ class TestClass {
     fun nonVoidMethod(): String {
         return "abcd"
     }
+
+    public fun publicScopeMethod() {}
+
+    private fun privateMethod(int: Long): String {
+        return "private scope method"
+    }
 }

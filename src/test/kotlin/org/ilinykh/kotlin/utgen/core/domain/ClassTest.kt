@@ -29,6 +29,6 @@ class ClassTest {
 
     @Test
     fun methodsNameTest() {
-        given.methods.map { it.name }.toSet() shouldBe setOf("voidMethod", "nonVoidMethod")
+        given.methods.map { it.name }.toSet() shouldBe setOf("voidMethod", "nonVoidMethod", "publicScopeMethod")
     }
 }
