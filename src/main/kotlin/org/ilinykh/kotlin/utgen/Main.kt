@@ -5,7 +5,7 @@ import KotlinParser
 import com.squareup.kotlinpoet.ClassName
 import org.antlr.v4.runtime.CharStreams
 import org.antlr.v4.runtime.CommonTokenStream
-import org.antlr.v4.runtime.tree.ParseTreeWalker
+import org.ilinykh.kotlin.utgen.domain.Class
 import java.io.File
 import kotlin.system.exitProcess
 
@@ -19,15 +19,11 @@ fun main(args: Array<String>) {
     val file = args.first().let(::File)
     val lexer = file.readText().let(CharStreams::fromString).let(::KotlinLexer)
     val parser = KotlinParser(CommonTokenStream(lexer))
-    val methodExtractor = MethodExtractor()
-
     val ctx = parser.kotlinFile()
-    ParseTreeWalker().walk(methodExtractor, ctx)
 
-    val packageHeader = ctx.packageHeader().identifier().simpleIdentifier().joinToString(".") { it.text }
-    val className = ctx.topLevelObject().first().declaration().classDeclaration().simpleIdentifier().text
-    val methods = methodExtractor.methods.toSet()
-
+    val clazz = Class(ctx)
     val output = file.path.replace("main", "test").let(::File).parent.replaceAfter("/test/kotlin/","")
-    UnitTestGenerator(ClassName(packageHeader, className), methods).generate().writeTo(File(output))
+
+    UnitTestGenerator(ClassName(clazz.packageName, clazz.className), clazz.methods.map { it.name }.toSet())
+        .generate().writeTo(File(output))
 }
