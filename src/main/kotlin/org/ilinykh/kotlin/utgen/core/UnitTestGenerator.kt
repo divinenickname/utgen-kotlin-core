@@ -1,4 +1,4 @@
-package org.ilinykh.kotlin.utgen
+package org.ilinykh.kotlin.utgen.core
 
 import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.CodeBlock

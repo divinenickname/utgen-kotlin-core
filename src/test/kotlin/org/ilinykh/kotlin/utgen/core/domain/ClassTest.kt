@@ -1,4 +1,4 @@
-package org.ilinykh.kotlin.utgen.domain
+package org.ilinykh.kotlin.utgen.core.domain
 
 import KotlinLexer
 import KotlinParser
@@ -10,7 +10,7 @@ import java.io.File
 
 class ClassTest {
 
-    private val file =  File("src/test/kotlin/org/ilinykh/kotlin/utgen/TestClass.kt")
+    private val file =  File("src/test/kotlin/org/ilinykh/kotlin/utgen/core/TestClass.kt")
     private val lexer = file.readText().let(CharStreams::fromString).let(::KotlinLexer)
     private val parser = KotlinParser(CommonTokenStream(lexer))
     private val ctx = parser.kotlinFile()
@@ -24,7 +24,7 @@ class ClassTest {
 
     @Test
     fun packageNameTest() {
-        given.packageName shouldBe "org.ilinykh.kotlin.utgen"
+        given.packageName shouldBe "org.ilinykh.kotlin.utgen.core"
     }
 
     @Test
