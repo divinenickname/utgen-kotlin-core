@@ -7,8 +7,8 @@ plugins {
     id("antlr")
 }
 
-version = "0.1.0-SNAPSHOT"
-group = "org.ilinykh.kotlin.utgen"
+version = "1.0.0"
+group = "io.github.divinenickname.kotlin.utgen"
 java.targetCompatibility = JavaVersion.VERSION_17
 java.sourceCompatibility = JavaVersion.VERSION_17
 
