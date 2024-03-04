@@ -1,8 +1,8 @@
-package org.ilinykh.kotlin.utgen.core.domain
+package io.github.divinenickname.kotlin.utgen.core.domain
 
 import KotlinParser
 import org.antlr.v4.runtime.tree.ParseTreeWalker
-import org.ilinykh.kotlin.utgen.core.MethodExtractor
+import io.github.divinenickname.kotlin.utgen.core.MethodExtractor
 
 class Class(
     private val ctx: KotlinParser.KotlinFileContext

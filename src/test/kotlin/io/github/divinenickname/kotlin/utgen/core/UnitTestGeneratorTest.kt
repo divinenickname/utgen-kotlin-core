@@ -1,4 +1,4 @@
-package org.ilinykh.kotlin.utgen.core
+package io.github.divinenickname.kotlin.utgen.core
 
 import com.squareup.kotlinpoet.ClassName
 import io.kotest.matchers.shouldBe

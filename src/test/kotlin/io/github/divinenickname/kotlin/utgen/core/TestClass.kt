@@ -1,4 +1,4 @@
-package org.ilinykh.kotlin.utgen.core
+package io.github.divinenickname.kotlin.utgen.core
 
 /**
  * Class only for testing parser and codegen.

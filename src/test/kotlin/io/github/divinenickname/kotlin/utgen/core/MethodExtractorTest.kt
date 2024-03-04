@@ -1,4 +1,4 @@
-package org.ilinykh.kotlin.utgen.core
+package io.github.divinenickname.kotlin.utgen.core
 
 import KotlinLexer
 import KotlinParser
@@ -10,7 +10,8 @@ import org.junit.jupiter.api.Test
 import java.io.File
 
 class MethodExtractorTest {
-    private val input = File("src/test/kotlin/org/ilinykh/kotlin/utgen/core/TestClass.kt").readText()
+    private val input = File("src/test/kotlin/io/github/divinenickname/kotlin/utgen/core/TestClass.kt")
+        .readText()
 
     @Test
     fun checkMethods() {
