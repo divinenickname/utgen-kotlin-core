@@ -46,16 +46,3 @@ tasks.withType<Jar>().configureEach {
 tasks.withType<Test> {
     useJUnitPlatform()
 }
-
-tasks.jar {
-    manifest {
-        attributes["Main-Class"] = "org.ilinykh.kotlin.utgen.MainKt"
-    }
-    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-    from(sourceSets.main.get().output)
-
-    dependsOn(configurations.runtimeClasspath)
-    from({
-        configurations.runtimeClasspath.get().filter { it.name.endsWith("jar") }.map { zipTree(it) }
-    })
-}
