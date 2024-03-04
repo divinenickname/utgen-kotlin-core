@@ -16,7 +16,8 @@ dependencies {
     antlr("org.antlr:antlr4:4.13.1")
     implementation("org.jetbrains.kotlin:kotlin-stdlib:1.9.22")
 
-    implementation("org.junit.jupiter:junit-jupiter-api:5.10.2")
+    api("org.junit.jupiter:junit-jupiter-api:5.10.2")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.10.2")
     testImplementation("org.junit.jupiter:junit-jupiter-engine:5.10.2")
     testImplementation("io.kotest:kotest-assertions-core-jvm:5.8.0")
 
@@ -26,7 +27,6 @@ dependencies {
 repositories {
     mavenLocal()
     mavenCentral()
-    maven("https://jitpack.io")
 }
 
 tasks.withType<KotlinCompile> {
