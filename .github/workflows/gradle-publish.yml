@@ -22,7 +22,7 @@ jobs:
           passphrase: ${{ secrets.GPG_PASSPHRASE }}
 
       - name: Setup JDK 17
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v4.1.0
         with:
           java-version: 17
           distribution: 'adopt'
