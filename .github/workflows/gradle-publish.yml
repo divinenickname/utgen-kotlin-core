@@ -1,0 +1,24 @@
+name: Publish to Maven Central
+
+on:
+  release:
+    types:
+      - created
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    environment: prod
+    steps:
+      - uses: actions/checkout@v2
+      - name: Access API Keys
+        run: |
+          touch.gradle.properties
+          echo GPG_KEYNAME=${{ secrets.GPG_KEYNAME }} >> gradle.properties
+          echo GPG_PASSPHRASE=${{ secrets.GPG_PASSPHRASE }} >> gradle.properties
+          cat gradle.properties
+
+      - name: Publish
+        run: ./gradlew publishToCentralPortal
