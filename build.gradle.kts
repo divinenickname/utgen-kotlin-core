@@ -46,3 +46,10 @@ tasks.withType<Jar>().configureEach {
 tasks.withType<Test> {
     useJUnitPlatform()
 }
+
+tasks.generateGrammarSource {
+    val pkg = "io.github.divinenickname.kotlin.utgen.core.antlr"
+    arguments = arguments + listOf("-package", pkg)
+    outputDirectory = outputDirectory.resolve(pkg.split(".").joinToString("/"))
+
+}

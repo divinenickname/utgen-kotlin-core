@@ -1,7 +1,7 @@
 package io.github.divinenickname.kotlin.utgen.core
 
-import KotlinLexer
-import KotlinParser
+import io.github.divinenickname.kotlin.utgen.core.antlr.KotlinLexer
+import io.github.divinenickname.kotlin.utgen.core.antlr.KotlinParser
 import io.kotest.matchers.collections.shouldContainAll
 import org.antlr.v4.runtime.CharStreams
 import org.antlr.v4.runtime.CommonTokenStream

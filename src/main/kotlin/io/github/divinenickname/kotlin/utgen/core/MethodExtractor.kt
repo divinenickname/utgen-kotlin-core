@@ -1,6 +1,7 @@
 package io.github.divinenickname.kotlin.utgen.core
 
-import KotlinParserBaseListener
+import io.github.divinenickname.kotlin.utgen.core.antlr.KotlinParser
+import io.github.divinenickname.kotlin.utgen.core.antlr.KotlinParserBaseListener
 
 class MethodExtractor : KotlinParserBaseListener() {
     val methods = mutableListOf<String>()
