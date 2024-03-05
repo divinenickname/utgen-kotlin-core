@@ -37,4 +37,6 @@ jobs:
       - name: Publish
         env:
           GIT_TAG: ${{github.ref_name}}
+          SONARTYPE_USER: ${{ secrets.SONARTYPE_USER }}
+          SONARTYPE_PASSWORD: ${{ secrets.SONARTYPE_PASSWORD }}
         run: ./gradlew publishToCentralPortal
