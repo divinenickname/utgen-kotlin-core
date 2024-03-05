@@ -16,7 +16,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Access API Keys
         run: |
-          touch.gradle.properties
+          touch gradle.properties
           echo GPG_KEYNAME=${{ secrets.GPG_KEYNAME }} >> gradle.properties
           echo GPG_PASSPHRASE=${{ secrets.GPG_PASSPHRASE }} >> gradle.properties
           cat gradle.properties
