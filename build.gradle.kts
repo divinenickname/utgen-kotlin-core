@@ -2,30 +2,33 @@ import net.thebugmc.gradle.sonatypepublisher.PublishingType
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    java
     idea
     kotlin("jvm") version "1.9.22"
     id("antlr")
     id("net.thebugmc.gradle.sonatype-central-portal-publisher") version "1.2.2"
     signing
+    `java-library`
 }
 
 description = "Unit-tests generation library for Kotlin language."
-version = System.getenv("GIT_TAG") ?: "1.0.0"
+version = System.getenv("GIT_TAG") ?: "1.0.0-SNAPSHOT"
 group = "io.github.divinenickname.kotlin.utgen"
 java.targetCompatibility = JavaVersion.VERSION_17
 java.sourceCompatibility = JavaVersion.VERSION_17
 
 dependencies {
     antlr("org.antlr:antlr4:4.13.1")
+
+    api("org.antlr:antlr4:4.13.1")
+    api("com.squareup:kotlinpoet:1.16.0")
+    api("org.junit.jupiter:junit-jupiter-api:5.10.2")
+
     implementation("org.jetbrains.kotlin:kotlin-stdlib:1.9.22")
 
-    api("org.junit.jupiter:junit-jupiter-api:5.10.2")
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.10.2")
     testImplementation("org.junit.jupiter:junit-jupiter-engine:5.10.2")
     testImplementation("io.kotest:kotest-assertions-core-jvm:5.8.0")
 
-    implementation("com.squareup:kotlinpoet:1.16.0")
 }
 
 repositories {
@@ -57,7 +60,6 @@ tasks.generateGrammarSource {
     outputDirectory = outputDirectory.resolve(pkg.split(".").joinToString("/"))
 
 }
-
 
 signing {
     useGpgCmd()
@@ -91,6 +93,18 @@ centralPortal {
             connection.set("scm:git:git@github.com:divinenickname/utgen-kotlin-core.git")
             developerConnection.set("scm:git:git@github.com:divinenickname/utgen-kotlin-core.git")
             url.set("https://github.com/divinenickname/utgen-kotlin-core")
+        }
+
+        withXml {
+            asNode().appendNode("dependencies").let {
+                for (dependency in configurations["api"].dependencies) {
+                    it.appendNode("dependency").apply {
+                        appendNode("groupId", dependency.group)
+                        appendNode("artifactId", dependency.name)
+                        appendNode("version", dependency.version)
+                    }
+                }
+            }
         }
     }
 }
