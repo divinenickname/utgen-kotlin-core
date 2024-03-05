@@ -21,4 +21,6 @@ jobs:
           cat gradle.properties
 
       - name: Publish
+        env:
+          GIT_TAG: ${{github.ref_name}}
         run: ./gradlew publishToCentralPortal

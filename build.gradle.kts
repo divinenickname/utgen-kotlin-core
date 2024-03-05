@@ -11,7 +11,7 @@ plugins {
 }
 
 description = "Unit-tests generation library for Kotlin language."
-version = "1.0.0"
+version = System.getenv("GIT_TAG") ?: "1.0.0"
 group = "io.github.divinenickname.kotlin.utgen"
 java.targetCompatibility = JavaVersion.VERSION_17
 java.sourceCompatibility = JavaVersion.VERSION_17
