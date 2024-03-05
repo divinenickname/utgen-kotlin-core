@@ -11,6 +11,7 @@ permissions:
 jobs:
   publish:
     environment: prod
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: Access API Keys
