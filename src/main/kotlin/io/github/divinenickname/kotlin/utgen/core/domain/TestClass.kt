@@ -13,7 +13,7 @@ class TestClass(private val originalClass: OriginalClass) : Class {
     override fun simpleName(): String = originalClass.simpleName().plus("Test")
     override fun publicMethods(): Set<Method> = originalClass.publicMethods()
 
-    private val objProperty = PropertySpec.builder("obj", toClassName(), KModifier.PRIVATE)
+    private val objProperty = PropertySpec.builder("obj", originalClass.toClassName(), KModifier.PRIVATE)
         .initializer("${originalClass.simpleName()}()")
         .build()
 
