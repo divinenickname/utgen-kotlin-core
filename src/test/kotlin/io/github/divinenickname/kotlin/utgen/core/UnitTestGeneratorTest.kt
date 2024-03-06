@@ -3,6 +3,7 @@ package io.github.divinenickname.kotlin.utgen.core
 import com.squareup.kotlinpoet.ClassName
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
+import java.io.File
 
 internal class UnitTestGeneratorTest {
     private val generator = UnitTestGenerator(
@@ -13,12 +14,12 @@ internal class UnitTestGeneratorTest {
     @Test
     fun example() {
         val expected = """
-            package org.ilinykh.kotlin.utgen
+            package io.github.divinenickname.kotlin.utgen.core
 
             import org.junit.jupiter.api.Test
 
             internal class TestClassTest {
-              private val obj: TestClass = TestClass()
+              private val obj: TestClassTest = TestClass()
 
               @Test
               public fun voidMethod_goldencase() {
@@ -31,11 +32,19 @@ internal class UnitTestGeneratorTest {
                 TODO("Implement")
                 val actual = obj.nonVoidMethod()
               }
+
+              @Test
+              public fun publicScopeMethod_goldencase() {
+                TODO("Implement")
+                val actual = obj.publicScopeMethod()
+              }
             }
             
         """.trimIndent()
 
-        val actual = generator.generate().toString()
-        actual shouldBe expected
+        val actual = File("src/main/kotlin/io/github/divinenickname/kotlin/utgen/core/TestClass.kt")
+            .toPath().let(generator::generate)
+
+        actual.toString() shouldBe expected
     }
 }

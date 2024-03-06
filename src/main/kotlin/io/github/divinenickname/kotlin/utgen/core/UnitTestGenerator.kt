@@ -7,7 +7,16 @@ import com.squareup.kotlinpoet.FunSpec
 import com.squareup.kotlinpoet.KModifier
 import com.squareup.kotlinpoet.PropertySpec
 import com.squareup.kotlinpoet.TypeSpec
+import io.github.divinenickname.kotlin.utgen.core.antlr.KotlinLexer
+import io.github.divinenickname.kotlin.utgen.core.antlr.KotlinParser
+import io.github.divinenickname.kotlin.utgen.core.domain.OriginalClass
+import io.github.divinenickname.kotlin.utgen.core.domain.OutputFile
+import io.github.divinenickname.kotlin.utgen.core.domain.TestClass
+import org.antlr.v4.runtime.CharStreams
+import org.antlr.v4.runtime.CommonTokenStream
 import org.junit.jupiter.api.Test
+import java.io.File
+import java.nio.file.Path
 
 class UnitTestGenerator(
     private val className: ClassName,
@@ -39,4 +48,27 @@ class UnitTestGenerator(
             .addType(cls)
             .build()
     }
+
+    /**
+     * Generate unit-test and save it to test path.
+     */
+    fun generate(path: Path): FileSpec {
+        val file = File(path.toUri())
+        val lexer = file.readText().let(CharStreams::fromString).let(::KotlinLexer)
+        val parser = KotlinParser(CommonTokenStream(lexer))
+        val ctx = parser.kotlinFile()
+
+        val testClass = OriginalClass(ctx).let(::TestClass)
+
+        return FileSpec.builder(testClass.packageName(), testClass.simpleName())
+            .addType(testClass.toTypeSpec())
+            .build()
+    }
+
+    fun generateAndSave(path: Path) {
+        val outputFile = OutputFile(path.toString())
+        generate(path).writeTo(outputFile)
+    }
 }
+
+

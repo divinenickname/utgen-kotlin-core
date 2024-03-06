@@ -8,27 +8,30 @@ import org.antlr.v4.runtime.CommonTokenStream
 import org.junit.jupiter.api.Test
 import java.io.File
 
-class ClassTest {
-
-    private val file =  File("src/test/kotlin/io/github/divinenickname/kotlin/utgen/core/TestClass.kt")
+abstract class AbstractClassTest(
+    private val expectedSimpleName: String,
+    private val expectedPackageName: String,
+    private val expectedPublicMethods: Set<Method>
+) {
+    private val file =  File("src/main/kotlin/io/github/divinenickname/kotlin/utgen/core/TestClass.kt")
     private val lexer = file.readText().let(CharStreams::fromString).let(::KotlinLexer)
     private val parser = KotlinParser(CommonTokenStream(lexer))
-    private val ctx = parser.kotlinFile()
+    val ctx = parser.kotlinFile()
 
-    private val given = Class(ctx)
+    abstract val given: Class
 
     @Test
     fun classNameTest() {
-        given.className shouldBe "TestClass"
+        given.simpleName() shouldBe expectedSimpleName
     }
 
     @Test
     fun packageNameTest() {
-        given.packageName shouldBe "io.github.divinenickname.kotlin.utgen.core"
+        given.packageName() shouldBe expectedPackageName
     }
 
     @Test
     fun methodsNameTest() {
-        given.methods.map { it.name }.toSet() shouldBe setOf("voidMethod", "nonVoidMethod", "publicScopeMethod")
+        given.publicMethods().map { it.name } shouldBe expectedPublicMethods.map { it.name }
     }
 }
