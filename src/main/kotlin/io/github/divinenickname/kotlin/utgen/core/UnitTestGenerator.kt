@@ -14,7 +14,9 @@ import java.nio.file.Path
 class UnitTestGenerator {
 
     /**
-     * Generate unit-test and save it to test path.
+     * Generate unit-test without saving. You should to save it manually.
+     *
+     * @param path Kotlin source file
      */
     fun generate(path: Path): FileSpec {
         val file = File(path.toUri())
@@ -29,6 +31,12 @@ class UnitTestGenerator {
             .build()
     }
 
+    /**
+     * Generate unit-tests and save it to test path using package provided from Kotlin .kt file.
+     * 'main' replaces by 'test'
+     *
+     * @param path Kotlin source file
+     */
     fun generateAndSave(path: Path) {
         val outputFile = OutputFile(path.toString())
         generate(path).writeTo(outputFile)
