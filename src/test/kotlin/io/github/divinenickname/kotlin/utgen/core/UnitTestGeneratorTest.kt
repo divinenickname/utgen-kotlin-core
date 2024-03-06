@@ -6,10 +6,7 @@ import org.junit.jupiter.api.Test
 import java.io.File
 
 internal class UnitTestGeneratorTest {
-    private val generator = UnitTestGenerator(
-        ClassName("org.ilinykh.kotlin.utgen", "TestClass"),
-        setOf("voidMethod", "nonVoidMethod"),
-    )
+    private val generator = UnitTestGenerator()
 
     @Test
     fun example() {
