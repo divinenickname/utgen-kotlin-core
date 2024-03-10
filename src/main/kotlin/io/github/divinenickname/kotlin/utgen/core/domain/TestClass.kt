@@ -5,6 +5,7 @@ import com.squareup.kotlinpoet.FunSpec
 import com.squareup.kotlinpoet.KModifier
 import com.squareup.kotlinpoet.PropertySpec
 import com.squareup.kotlinpoet.TypeSpec
+import io.github.divinenickname.kotlin.utgen.core.domain.codeblocks.ImplementBlock
 import org.junit.jupiter.api.Test
 
 class TestClass(private val originalClass: OriginalClass) : Class {
@@ -22,7 +23,7 @@ class TestClass(private val originalClass: OriginalClass) : Class {
         .map {
         FunSpec.builder("${it}_goldencase")
             .addAnnotation(Test::class)
-            .addCode(CodeBlock.of("TODO(\"Implement\")\n"))
+            .addCode(ImplementBlock.codeBlock())
             .addCode(CodeBlock.of("val actual = ${objProperty.name}.${it}()"))
             .build()
     }
