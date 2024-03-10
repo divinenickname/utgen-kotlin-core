@@ -17,5 +17,5 @@ class OriginalClass(
     override fun simpleName(): String = ctx.topLevelObject().first()
         .declaration().classDeclaration().simpleIdentifier().text
 
-    override fun publicMethods(): Set<Method> = methodExtractor.methods.map(::Method).toSet()
+    override fun publicMethods(): Set<Method> = methodExtractor.methods
 }

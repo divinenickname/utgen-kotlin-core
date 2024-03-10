@@ -2,6 +2,7 @@ package io.github.divinenickname.kotlin.utgen.core
 
 import io.github.divinenickname.kotlin.utgen.core.antlr.KotlinLexer
 import io.github.divinenickname.kotlin.utgen.core.antlr.KotlinParser
+import io.github.divinenickname.kotlin.utgen.core.domain.Method
 import io.kotest.matchers.collections.shouldContainAll
 import org.antlr.v4.runtime.CharStreams
 import org.antlr.v4.runtime.CommonTokenStream
@@ -15,6 +16,12 @@ class MethodExtractorTest {
 
     @Test
     fun checkMethods() {
+        val expected = setOf(
+            Method("voidMethod"),
+            Method("publicScopeMethod"),
+            Method("nonVoidMethod", "String")
+        )
+
         val lexer = KotlinLexer(CharStreams.fromString(input))
         val parser = KotlinParser(CommonTokenStream(lexer))
 
@@ -23,6 +30,6 @@ class MethodExtractorTest {
 
         ParseTreeWalker().walk(methodExtractor, kotlinFileContext)
 
-        methodExtractor.methods shouldContainAll setOf("voidMethod", "nonVoidMethod")
+        methodExtractor.methods shouldContainAll expected
     }
 }
