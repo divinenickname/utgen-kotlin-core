@@ -6,6 +6,7 @@ import com.squareup.kotlinpoet.KModifier
 import com.squareup.kotlinpoet.PropertySpec
 import com.squareup.kotlinpoet.TypeSpec
 import io.github.divinenickname.kotlin.utgen.core.domain.codeblocks.ImplementBlock
+import io.github.divinenickname.kotlin.utgen.core.domain.codeblocks.UnitAssertionBlock
 import org.junit.jupiter.api.Test
 
 class TestClass(private val originalClass: OriginalClass) : Class {
@@ -19,15 +20,13 @@ class TestClass(private val originalClass: OriginalClass) : Class {
         .build()
 
     private val funSpecs = publicMethods()
-        .map { it.name }
         .map {
-        FunSpec.builder("${it}_goldencase")
-            .addAnnotation(Test::class)
-            .addCode(ImplementBlock.codeBlock())
-            .addCode(CodeBlock.of("val actual = ${objProperty.name}.${it}()"))
-            .build()
-    }
-
+            FunSpec.builder("${it.name}_goldencase")
+                .addAnnotation(Test::class)
+                .addCode(ImplementBlock.codeBlock())
+                .addCode(UnitAssertionBlock(objProperty, it).codeBlock())
+                .build()
+        }
 
     fun toTypeSpec() = TypeSpec
         .classBuilder(simpleName())

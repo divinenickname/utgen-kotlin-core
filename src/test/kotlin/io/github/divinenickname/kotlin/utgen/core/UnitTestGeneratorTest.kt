@@ -1,6 +1,5 @@
 package io.github.divinenickname.kotlin.utgen.core
 
-import com.squareup.kotlinpoet.ClassName
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
 import java.io.File
@@ -16,12 +15,12 @@ internal class UnitTestGeneratorTest {
             import org.junit.jupiter.api.Test
 
             internal class TestClassTest {
-              private val obj: TestClassTest = TestClass()
+              private val obj: TestClass = TestClass()
 
               @Test
               public fun voidMethod_goldencase() {
                 TODO("Implement")
-                val actual = obj.voidMethod()
+                Assertions.assertDoesNotThrow { obj.voidMethod() }
               }
 
               @Test
@@ -33,7 +32,7 @@ internal class UnitTestGeneratorTest {
               @Test
               public fun publicScopeMethod_goldencase() {
                 TODO("Implement")
-                val actual = obj.publicScopeMethod()
+                Assertions.assertDoesNotThrow { obj.publicScopeMethod() }
               }
             }
             
