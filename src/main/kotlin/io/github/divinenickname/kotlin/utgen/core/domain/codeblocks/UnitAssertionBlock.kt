@@ -11,13 +11,13 @@ class AssertDoesNotThrowCodeBlock(private val objProperty: PropertySpec, private
 
 class AssertActualCodeBlock(private val objProperty: PropertySpec, private val method: Method) : CodeBlockObj {
     override fun codeBlock(): CodeBlock {
-        val codeBlockStr = """
-                val expected = ${method.returnValue}()
-                val actual = ${objProperty.name}.${method.name}()
-                
-                Assertions.assertEquals(expected, actual)
-            """.trimIndent()
-        return CodeBlock.of(codeBlockStr)
+        val blockStr = """
+            val expected = ${method.returnValue}()
+            val actual = ${objProperty.name}.${method.name}()
+            
+            Assertions.assertEquals(expected, actual)
+        """.trimIndent()
+        return blockStr.let(CodeBlock::of)
     }
 }
 

@@ -1,6 +1,7 @@
 package io.github.divinenickname.kotlin.utgen.core
 
 import com.squareup.kotlinpoet.FileSpec
+import com.squareup.kotlinpoet.Import
 import io.github.divinenickname.kotlin.utgen.core.antlr.KotlinLexer
 import io.github.divinenickname.kotlin.utgen.core.antlr.KotlinParser
 import io.github.divinenickname.kotlin.utgen.core.domain.OriginalClass
@@ -8,6 +9,7 @@ import io.github.divinenickname.kotlin.utgen.core.domain.OutputFile
 import io.github.divinenickname.kotlin.utgen.core.domain.TestClass
 import org.antlr.v4.runtime.CharStreams
 import org.antlr.v4.runtime.CommonTokenStream
+import org.junit.jupiter.api.Assertions
 import java.io.File
 import java.nio.file.Path
 
@@ -28,6 +30,7 @@ class UnitTestGenerator {
 
         return FileSpec.builder(testClass.packageName(), testClass.simpleName())
             .addType(testClass.toTypeSpec())
+            .addImport("org.junit.jupiter.api", "Assertions")
             .build()
     }
 
