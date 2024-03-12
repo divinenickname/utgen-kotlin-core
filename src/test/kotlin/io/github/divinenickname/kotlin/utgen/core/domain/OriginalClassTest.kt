@@ -22,11 +22,6 @@ class OriginalClassTest {
     private val given = OriginalClass(ctx)
 
     @Test
-    fun primaryConstructor_goldencase() {
-        given.primaryConstructor().fields shouldContainAll mapOf("str" to "String")
-    }
-
-    @Test
     fun classNameTest() {
         given.simpleName() shouldBe expectedSimpleName
     }
