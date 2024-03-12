@@ -12,8 +12,14 @@ class AssertActualCodeBlockTest {
 
     @Test
     fun codeBlock_goldencase() {
-        val actual = AssertActualCodeBlock(propSpec, Method("test")).codeBlock()
-        val expected = CodeBlock.of("val actual = obj.test()")
+        val actual = AssertActualCodeBlock(propSpec, Method("test", "MyRetObject")).codeBlock()
+        val expected = """
+            val expected = MyRetObject()
+            val actual = obj.test()
+            
+            Assertions.assertEquals(expected, actual)
+        """.trimIndent()
+            .let(CodeBlock::of)
 
         actual shouldBe expected
     }

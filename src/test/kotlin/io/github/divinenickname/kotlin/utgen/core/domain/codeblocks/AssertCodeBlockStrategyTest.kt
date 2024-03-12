@@ -22,7 +22,12 @@ class AssertCodeBlockStrategyTest {
     @Test
     fun returnValueIsObject() {
         val actual = AssertCodeBlockStrategy(propSpec, Method("test", "String")).codeBlock()
-        val expected = CodeBlock.of("val actual = obj.test()")
+        val expected = """
+            val expected = String()
+            val actual = obj.test()
+
+            Assertions.assertEquals(expected, actual)
+        """.trimIndent().let(CodeBlock::of)
 
         actual shouldBe expected
     }

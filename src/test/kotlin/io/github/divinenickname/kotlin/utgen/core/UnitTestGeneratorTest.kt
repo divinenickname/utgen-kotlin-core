@@ -26,7 +26,10 @@ internal class UnitTestGeneratorTest {
               @Test
               public fun nonVoidMethod_goldencase() {
                 TODO("Implement")
+                val expected = String()
                 val actual = obj.nonVoidMethod()
+            
+                Assertions.assertEquals(expected, actual)
               }
 
               @Test
