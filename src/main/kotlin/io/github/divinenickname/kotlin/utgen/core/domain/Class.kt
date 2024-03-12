@@ -4,7 +4,6 @@ interface Class {
     fun packageName(): String
     fun simpleName(): String
     fun publicMethods(): Set<Method>
-    fun primaryConstructor(): Constructor
 }
 
 interface TestingClass {
