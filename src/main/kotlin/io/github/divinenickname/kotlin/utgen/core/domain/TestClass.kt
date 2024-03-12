@@ -1,37 +1,35 @@
 package io.github.divinenickname.kotlin.utgen.core.domain
 
-import com.squareup.kotlinpoet.CodeBlock
-import com.squareup.kotlinpoet.FunSpec
 import com.squareup.kotlinpoet.KModifier
-import com.squareup.kotlinpoet.PropertySpec
 import com.squareup.kotlinpoet.TypeSpec
-import io.github.divinenickname.kotlin.utgen.core.domain.codeblocks.ImplementBlock
-import io.github.divinenickname.kotlin.utgen.core.domain.codeblocks.UnitAssertionBlock
-import org.junit.jupiter.api.Test
+import io.github.divinenickname.kotlin.utgen.core.domain.kpoet.ObjectProperty
+import io.github.divinenickname.kotlin.utgen.core.domain.testclass.PublicMethodSpec
 
-class TestClass(private val originalClass: OriginalClass) : Class {
+class TestClass(
+    private val packageName: String,
+    private val originalClassName: String,
+    private val className: String,
+    private val publicMethods: Set<Method>,
+) : TestingClass {
+    constructor(originalClass: OriginalClass) : this(
+        originalClassName = originalClass.simpleName(),
+        packageName = originalClass.packageName(),
+        className = "${originalClass.simpleName()}Test",
+        publicMethods = originalClass.publicMethods()
+    )
 
-    override fun packageName(): String = originalClass.packageName()
-    override fun simpleName(): String = originalClass.simpleName().plus("Test")
-    override fun publicMethods(): Set<Method> = originalClass.publicMethods()
-
-    private val objProperty = PropertySpec.builder("obj", originalClass.toClassName(), KModifier.PRIVATE)
-        .initializer("${originalClass.simpleName()}()")
-        .build()
-
-    private val funSpecs = publicMethods()
-        .map {
-            FunSpec.builder("${it.name}_goldencase")
-                .addAnnotation(Test::class)
-                .addCode(ImplementBlock.codeBlock())
-                .addCode(UnitAssertionBlock(objProperty, it).codeBlock())
-                .build()
-        }
+    private val objProperty = ObjectProperty(packageName, originalClassName).toPropertySpec()
 
     fun toTypeSpec() = TypeSpec
-        .classBuilder(simpleName())
+        .classBuilder(className)
         .addModifiers(KModifier.INTERNAL)
         .addProperty(objProperty)
-        .addFunctions(funSpecs)
+        .addFunctions(publicMethods.map { PublicMethodSpec(it, objProperty).toSpec() })
         .build()
+
+    override fun packageName(): String = packageName
+
+    override fun simpleName(): String = className
+
+    override fun publicMethods(): Set<Method> = publicMethods
 }

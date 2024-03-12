@@ -3,7 +3,11 @@ package io.github.divinenickname.kotlin.utgen.core
 /**
  * Class only for testing parser and codegen.
  */
-class TestClass {
+class TestClass(
+    val str: String = "abc",
+    val int: Int,
+    private val privateInt: Int
+) {
 
     fun voidMethod() {
         println("VOID method")

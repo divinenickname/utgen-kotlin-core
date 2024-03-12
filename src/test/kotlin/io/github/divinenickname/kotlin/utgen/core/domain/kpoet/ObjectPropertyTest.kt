@@ -9,7 +9,7 @@ class ObjectPropertyTest {
     fun objectProperty_goldencase() {
         val actual = ObjectProperty("abc", "Pierdolle").toPropertySpec().toString()
 
-        val expected = "private val obj: abc.pierdolle = Pierdolle()\n"
+        val expected = "private val obj: abc.Pierdolle = Pierdolle()\n"
 
         actual shouldBe expected
     }

@@ -9,10 +9,8 @@ class ObjectProperty(
     private val className: String
 ) {
 
-    private val simpleName = className.lowercase()
-
     fun toPropertySpec(): PropertySpec = PropertySpec
-        .builder("obj", ClassName(packageName, simpleName), KModifier.PRIVATE)
+        .builder("obj", ClassName(packageName, className), KModifier.PRIVATE)
         .initializer("${className}()")
         .build()
 }

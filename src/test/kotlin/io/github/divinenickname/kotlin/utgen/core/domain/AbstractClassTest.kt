@@ -18,7 +18,7 @@ abstract class AbstractClassTest(
     private val parser = KotlinParser(CommonTokenStream(lexer))
     val ctx = parser.kotlinFile()
 
-    abstract val given: Class
+    abstract val given: TestingClass
 
     @Test
     fun classNameTest() {
