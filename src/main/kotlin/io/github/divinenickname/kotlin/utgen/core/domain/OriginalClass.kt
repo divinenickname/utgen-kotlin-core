@@ -1,6 +1,6 @@
 package io.github.divinenickname.kotlin.utgen.core.domain
 
-import io.github.divinenickname.kotlin.utgen.core.MethodExtractor
+import io.github.divinenickname.kotlin.utgen.core.extractor.MethodExtractor
 import io.github.divinenickname.kotlin.utgen.core.extractor.PrimaryConstructorExtractor
 import io.github.divinenickname.kotlin.utgen.core.antlr.KotlinParser
 import org.antlr.v4.runtime.tree.ParseTreeWalker

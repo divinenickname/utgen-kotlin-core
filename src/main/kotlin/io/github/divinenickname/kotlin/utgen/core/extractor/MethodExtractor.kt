@@ -1,4 +1,4 @@
-package io.github.divinenickname.kotlin.utgen.core
+package io.github.divinenickname.kotlin.utgen.core.extractor
 
 import io.github.divinenickname.kotlin.utgen.core.antlr.KotlinParser
 import io.github.divinenickname.kotlin.utgen.core.antlr.KotlinParserBaseListener
