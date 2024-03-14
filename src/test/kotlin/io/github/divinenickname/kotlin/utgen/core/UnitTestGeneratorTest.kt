@@ -12,6 +12,7 @@ internal class UnitTestGeneratorTest {
         val expected = """
             package io.github.divinenickname.kotlin.utgen.core
 
+            import org.junit.jupiter.api.Assertions
             import org.junit.jupiter.api.Test
 
             internal class TestClassTest {
