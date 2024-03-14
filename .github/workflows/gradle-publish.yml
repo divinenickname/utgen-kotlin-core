@@ -34,7 +34,7 @@ jobs:
           echo GPG_PASSPHRASE=${{ secrets.GPG_PASSPHRASE }} >> gradle.properties
           cat gradle.properties
 
-      - name: Publish
+      - name: Publish to Sonartype Cental
         env:
           GIT_TAG: ${{github.ref_name}}
           SONARTYPE_USER: ${{ secrets.SONARTYPE_USER }}
