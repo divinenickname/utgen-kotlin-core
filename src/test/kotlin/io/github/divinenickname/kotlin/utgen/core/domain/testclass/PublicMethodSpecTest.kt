@@ -30,7 +30,7 @@ class PublicMethodSpecTest {
     fun codeBlock_correct() {
         val expected = """
             TODO("Implement")
-            ${AssertCodeBlockStrategy(propSpec, method).codeBlock()}
+            ${AssertCodeBlockStrategy(propSpec, method).getStrategy().codeBlock()}
         """.trimIndent()
 
         methodSpec.toSpec().body shouldBe CodeBlock.of(expected)

@@ -15,7 +15,7 @@ class PublicMethodSpec(
     private val funSpec = FunSpec.builder("${method.name}_goldencase")
         .addAnnotation(Test::class)
         .addCode(ImplementBlock.codeBlock())
-        .addCode(AssertCodeBlockStrategy(objectProperty, method).codeBlock())
+        .addCode(AssertCodeBlockStrategy(objectProperty, method).getStrategy().codeBlock())
         .build()
 
     fun toSpec(): FunSpec = funSpec

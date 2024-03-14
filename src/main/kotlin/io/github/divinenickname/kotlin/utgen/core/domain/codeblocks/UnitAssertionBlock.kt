@@ -20,11 +20,3 @@ class AssertActualCodeBlock(private val objProperty: PropertySpec, private val m
         return blockStr.let(CodeBlock::of)
     }
 }
-
-class AssertCodeBlockStrategy(private val objProperty: PropertySpec, private val method: Method) : CodeBlockObj {
-    override fun codeBlock(): CodeBlock = if (method.returnValue == "Unit") {
-        AssertDoesNotThrowCodeBlock(objProperty, method)
-    } else {
-        AssertActualCodeBlock(objProperty, method)
-    }.codeBlock()
-}
