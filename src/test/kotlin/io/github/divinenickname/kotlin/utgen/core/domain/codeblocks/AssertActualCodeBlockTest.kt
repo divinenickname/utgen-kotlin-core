@@ -23,4 +23,18 @@ class AssertActualCodeBlockTest {
 
         actual shouldBe expected
     }
+
+    @Test
+    fun codeBlock_nullable() {
+        val actual = AssertActualCodeBlock(propSpec, Method("test", "MyRetObject?")).codeBlock()
+        val expected = """
+            val expected = MyRetObject()
+            val actual = obj.test()
+            
+            Assertions.assertEquals(expected, actual)
+        """.trimIndent()
+            .let(CodeBlock::of)
+
+        actual shouldBe expected
+    }
 }

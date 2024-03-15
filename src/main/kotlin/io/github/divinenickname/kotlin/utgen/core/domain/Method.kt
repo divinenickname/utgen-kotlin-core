@@ -2,8 +2,12 @@ package io.github.divinenickname.kotlin.utgen.core.domain
 
 class Method(
     val name: String,
-    val returnValue: String = "Unit"
+    private val returnValue: String = "Unit"
 ) {
+
+    fun isNullable(): Boolean = returnValue.last() == '?'
+    fun returnValue(): String = returnValue.takeUnless { isNullable() } ?: returnValue.dropLast(1)
+
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
