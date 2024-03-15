@@ -15,7 +15,7 @@ class MethodChainProcessor(private val objProperty: PropertySpec, private val me
     )
 
     fun generateCodeBlocks(): Set<FunSpec> = codeChain
-        .takeWhile { it.isValid(method) }
+        .filter { it.isValid(method) }
         .map(this::funSpec)
         .takeIf { it.isNotEmpty() }?.toSet()
         ?: setOf(defaultFunSpec())

@@ -5,7 +5,7 @@ class Method(
     private val returnValue: String = "Unit"
 ) {
 
-    fun isNullable(): Boolean = returnValue.last() == '?'
+    fun isNullable(): Boolean = returnValue.trim().last() == '?'
     fun returnValue(): String = returnValue.takeUnless { isNullable() } ?: returnValue.dropLast(1)
 
     override fun equals(other: Any?): Boolean {
