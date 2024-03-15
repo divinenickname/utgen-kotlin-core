@@ -7,4 +7,5 @@ import io.github.divinenickname.kotlin.utgen.core.domain.Method
 interface CodeChain {
     fun isValid(method: Method): Boolean
     fun execute(objProperty: PropertySpec, method: Method): CodeBlock
+    fun testMethodName(method: Method): String
 }

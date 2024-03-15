@@ -12,4 +12,6 @@ class AssertPrimitiveMethodChain : CodeChain {
 
     override fun execute(objProperty: PropertySpec, method: Method): CodeBlock =
         AssertPrimitiveMethodCodeBlock(objProperty, method).codeBlock()
+
+    override fun testMethodName(method: Method): String = "${method.name}Test"
 }

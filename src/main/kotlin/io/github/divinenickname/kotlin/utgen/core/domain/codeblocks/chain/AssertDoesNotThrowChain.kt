@@ -10,4 +10,7 @@ class AssertDoesNotThrowChain : CodeChain {
 
     override fun execute(objProperty: PropertySpec, method: Method): CodeBlock =
         AssertDoesNotThrowCodeBlock(objProperty, method).codeBlock()
+
+    override fun testMethodName(method: Method): String = "${method.name}_notThrowTest"
+
 }

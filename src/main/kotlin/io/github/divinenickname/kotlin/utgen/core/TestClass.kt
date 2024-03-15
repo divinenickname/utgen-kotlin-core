@@ -17,7 +17,9 @@ class TestClass(
         return "abcd"
     }
 
-    public fun publicScopeMethod() {}
+    public fun publicScopeMethod() {
+        println()
+    }
 
     private fun privateMethod(int: Long): String {
         return "private scope method"

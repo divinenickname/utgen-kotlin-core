@@ -2,8 +2,8 @@ package io.github.divinenickname.kotlin.utgen.core.domain
 
 import com.squareup.kotlinpoet.KModifier
 import com.squareup.kotlinpoet.TypeSpec
+import io.github.divinenickname.kotlin.utgen.core.domain.codeblocks.chain.MethodChainProcessor
 import io.github.divinenickname.kotlin.utgen.core.domain.kpoet.ObjectProperty
-import io.github.divinenickname.kotlin.utgen.core.domain.testclass.PublicMethodSpec
 
 class TestClass(
     private val packageName: String,
@@ -20,12 +20,17 @@ class TestClass(
 
     private val objProperty = ObjectProperty(packageName, originalClassName).toPropertySpec()
 
-    fun toTypeSpec() = TypeSpec
-        .classBuilder(className)
-        .addModifiers(KModifier.INTERNAL)
-        .addProperty(objProperty)
-        .addFunctions(publicMethods.map { PublicMethodSpec(it, objProperty).toSpec() })
-        .build()
+    fun toTypeSpec(): TypeSpec {
+        val funSpecs = publicMethods.map {
+            MethodChainProcessor(objProperty, it).generateCodeBlocks()
+        }.flatten().toSet()
+
+        return TypeSpec
+            .classBuilder(className)
+            .addModifiers(KModifier.INTERNAL)
+            .addFunctions(funSpecs)
+            .build()
+    }
 
     override fun packageName(): String = packageName
 

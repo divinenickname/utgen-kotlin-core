@@ -10,4 +10,6 @@ class AssertNullChain : CodeChain {
 
     override fun execute(objProperty: PropertySpec, method: Method): CodeBlock =
         AssertNullCodeBlock(objProperty, method).codeBlock()
+
+    override fun testMethodName(method: Method): String = "${method.name}_isNullTest"
 }
