@@ -8,7 +8,8 @@ import io.github.divinenickname.kotlin.utgen.core.domain.codeblocks.AssertActual
 class MethodChainProcessor(private val objProperty: PropertySpec, private val method: Method) {
     private val codeChain = setOf(
         AssertDoesNotThrowChain(),
-        AssertPrimitiveMethodChain()
+        AssertPrimitiveMethodChain(),
+        AssertNullChain()
     )
 
     fun generateCodeBlocks(): Set<CodeBlock> {
