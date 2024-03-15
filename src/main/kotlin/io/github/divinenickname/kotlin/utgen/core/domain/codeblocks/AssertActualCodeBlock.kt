@@ -10,7 +10,7 @@ class AssertActualCodeBlock(
 ) : CodeBlockObj {
     override fun codeBlock(): CodeBlock {
         val blockStr = """
-            val expected = ${method.returnValue}()
+            val expected = ${method.returnValue()}()
             val actual = ${objProperty.name}.${method.name}()
             
             Assertions.assertEquals(expected, actual)

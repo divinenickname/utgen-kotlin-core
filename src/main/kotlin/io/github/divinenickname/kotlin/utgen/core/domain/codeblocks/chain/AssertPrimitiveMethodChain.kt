@@ -8,7 +8,7 @@ import io.github.divinenickname.kotlin.utgen.core.domain.codeblocks.AssertPrimit
 class AssertPrimitiveMethodChain : CodeChain {
     private val primitives = setOf("Byte", "Short", "Int", "Long", "Float", "Double", "Char", "Boolean")
 
-    override fun isValid(method: Method): Boolean = primitives.contains(method.returnValue)
+    override fun isValid(method: Method): Boolean = primitives.contains(method.returnValue())
 
     override fun execute(objProperty: PropertySpec, method: Method): CodeBlock =
         AssertPrimitiveMethodCodeBlock(objProperty, method).codeBlock()
