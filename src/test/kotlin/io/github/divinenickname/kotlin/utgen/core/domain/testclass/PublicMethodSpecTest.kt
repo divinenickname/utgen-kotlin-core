@@ -5,7 +5,6 @@ import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.CodeBlock
 import com.squareup.kotlinpoet.PropertySpec
 import io.github.divinenickname.kotlin.utgen.core.domain.Method
-import io.github.divinenickname.kotlin.utgen.core.domain.codeblocks.AssertCodeBlockStrategy
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
 
@@ -30,7 +29,7 @@ class PublicMethodSpecTest {
     fun codeBlock_correct() {
         val expected = """
             TODO("Implement")
-            ${AssertCodeBlockStrategy(propSpec, method).getStrategy().codeBlock()}
+            Assertions.assertDoesNotThrow { abc.test() }
         """.trimIndent()
 
         methodSpec.toSpec().body shouldBe CodeBlock.of(expected)
