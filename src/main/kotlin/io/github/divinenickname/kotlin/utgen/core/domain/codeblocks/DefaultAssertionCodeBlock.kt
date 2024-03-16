@@ -4,7 +4,7 @@ import com.squareup.kotlinpoet.CodeBlock
 import com.squareup.kotlinpoet.PropertySpec
 import io.github.divinenickname.kotlin.utgen.core.domain.Method
 
-class AssertActualCodeBlock(
+class DefaultAssertionCodeBlock(
     private val objProperty: PropertySpec,
     private val method: Method
 ) : CodeBlockObj {
