@@ -4,7 +4,7 @@ import com.squareup.kotlinpoet.CodeBlock
 import com.squareup.kotlinpoet.FunSpec
 import com.squareup.kotlinpoet.PropertySpec
 import io.github.divinenickname.kotlin.utgen.core.domain.Method
-import io.github.divinenickname.kotlin.utgen.core.domain.codeblocks.AssertActualCodeBlock
+import io.github.divinenickname.kotlin.utgen.core.domain.codeblocks.DefaultAssertionCodeBlock
 import org.junit.jupiter.api.Test
 
 class MethodChainProcessor(private val objProperty: PropertySpec, private val method: Method) {
@@ -14,9 +14,8 @@ class MethodChainProcessor(private val objProperty: PropertySpec, private val me
         ::AssertNullChain,
         ::AssertTrueChain,
         ::AssertFalseChain,
+        ::DefaultAssertionChain,
     ).map { it(objProperty, method) }
-
-    val a = ::AssertFalseChain
 
     fun generateCodeBlocks(): Set<FunSpec> = codeChain
         .filter { it.isValid() }
@@ -36,6 +35,6 @@ class MethodChainProcessor(private val objProperty: PropertySpec, private val me
     private fun defaultFunSpec(): FunSpec = FunSpec.builder(method.name)
         .addAnnotation(Test::class)
         .addCode(CodeBlock.of("val obj = ${objProperty.initializer}\n\n"))
-        .addCode(AssertActualCodeBlock(objProperty, method).codeBlock())
+        .addCode(DefaultAssertionCodeBlock(objProperty, method).codeBlock())
         .build()
 }

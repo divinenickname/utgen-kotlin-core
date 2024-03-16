@@ -6,13 +6,13 @@ import io.github.divinenickname.kotlin.utgen.core.domain.kpoet.ObjectProperty
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
 
-class AssertActualCodeBlockTest {
+class DefaultAssertionCodeBlockTest {
 
     private val propSpec = ObjectProperty("org.example", "myClass").toPropertySpec()
 
     @Test
     fun codeBlock_goldencase() {
-        val actual = AssertActualCodeBlock(propSpec, Method("test", "MyRetObject")).codeBlock()
+        val actual = DefaultAssertionCodeBlock(propSpec, Method("test", "MyRetObject")).codeBlock()
         val expected = """
             val expected = MyRetObject()
             val actual = obj.test()
@@ -26,7 +26,7 @@ class AssertActualCodeBlockTest {
 
     @Test
     fun codeBlock_nullable() {
-        val actual = AssertActualCodeBlock(propSpec, Method("test", "MyRetObject?")).codeBlock()
+        val actual = DefaultAssertionCodeBlock(propSpec, Method("test", "MyRetObject?")).codeBlock()
         val expected = """
             val expected = MyRetObject()
             val actual = obj.test()

@@ -6,7 +6,7 @@ class Method(
 ) {
 
     fun isNullable(): Boolean = returnValue.trim().last() == '?'
-    fun returnValue(): String = returnValue.takeUnless { isNullable() } ?: returnValue.dropLast(1)
+    fun returnValue(): String = returnValue.takeUnless { isNullable() } ?: returnValue.trim().dropLast(1)
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
