@@ -103,5 +103,8 @@ internal class MyTestClassTest {
 }
 ```
 
+See [EXAMPLES.md](EXAMPLES.md) for more examples.
+
+
 ## See also
 - Idea IDE plugin: https://github.com/divinenickname/utgen-kotlin-idea-plugin
