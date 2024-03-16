@@ -3,28 +3,27 @@ package io.github.divinenickname.kotlin.utgen.core.domain.codeblocks.chain
 import io.github.divinenickname.kotlin.utgen.core.domain.Method
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
-import org.mockito.Mockito.mock
+import org.mockito.Mockito
 
-class AssertNullChainTest {
-
+class AssertTrueChainTest {
     @Test
     fun isValid_shouldTrue() {
-        val actual = AssertNullChain(mock(), Method("testName", "String?")).isValid()
+        val actual = AssertTrueChain(Mockito.mock(), Method("test", "Boolean")).isValid()
 
         actual shouldBe true
     }
 
     @Test
     fun isValid_shouldFalse() {
-        val actual = AssertNullChain(mock(), Method("testName", "String")).isValid()
+        val actual = AssertTrueChain(Mockito.mock(), Method("test", "String")).isValid()
 
         actual shouldBe false
     }
 
     @Test
     fun testMethodName() {
-        val actual = AssertNullChain(mock(), Method("testName", "String")).testMethodName()
+        val actual = AssertTrueChain(Mockito.mock(), Method("testName", "Boolean")).testMethodName()
 
-        actual shouldBe "testName_isNullTest"
+        actual shouldBe "testName_isTrue"
     }
 }

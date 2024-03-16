@@ -9,23 +9,27 @@ import org.junit.jupiter.api.Test
 
 class MethodChainProcessor(private val objProperty: PropertySpec, private val method: Method) {
     private val codeChain = setOf(
-        AssertDoesNotThrowChain(),
-        AssertPrimitiveMethodChain(),
-        AssertNullChain()
-    )
+        ::AssertDoesNotThrowChain,
+        ::AssertPrimitiveMethodChain,
+        ::AssertNullChain,
+        ::AssertTrueChain,
+        ::AssertFalseChain,
+    ).map { it(objProperty, method) }
+
+    val a = ::AssertFalseChain
 
     fun generateCodeBlocks(): Set<FunSpec> = codeChain
-        .filter { it.isValid(method) }
+        .filter { it.isValid() }
         .map(this::funSpec)
         .takeIf { it.isNotEmpty() }?.toSet()
         ?: setOf(defaultFunSpec())
 
 
     private fun funSpec(codeChain: CodeChain): FunSpec {
-        return FunSpec.builder(codeChain.testMethodName(method))
+        return FunSpec.builder(codeChain.testMethodName())
             .addAnnotation(Test::class)
             .addCode(CodeBlock.of("val obj = ${objProperty.initializer}\n\n"))
-            .addCode(codeChain.execute(objProperty, method))
+            .addCode(codeChain.execute())
             .build()
     }
 
