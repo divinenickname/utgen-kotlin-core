@@ -2,13 +2,17 @@
 ![main branch build](https://github.com/divinenickname/utgen-kotlin-core/actions/workflows/mainbranch-build.yml/badge.svg)
 [![Maven](https://img.shields.io/maven-metadata/v?metadataUrl=https%3A%2F%2Frepo1.maven.org%2Fmaven2%2Fio%2Fgithub%2Fdivinenickname%2Fkotlin%2Futgen%2Futgen-core%2Fmaven-metadata.xml&style=flat&color=green)](https://central.sonatype.com/artifact/io.github.divinenickname.kotlin.utgen/utgen-core)
 
-# Utgen-core
+<img width="100px" src="./logo.svg"  alt="Logo image. Red circle with letter U inside."/><br>
+# UTGen-core 
+
 Simple unit-tests generator for Kotlin language.
 
 ## Features
-- [x] Generate empty methods for golden cases
-- [ ] Generate if-else statements cases
-- [ ] Generate try-catch statements cases
+- Default case with return value
+- Default case for 'Unit' value
+- Nullable return types case
+- Primitives test case
+- Boolean true/false cases
 
 ## How to
 Add dependency:
@@ -32,54 +36,75 @@ UnitTestGenerator()
 #### Example
 Your source class is:
 ```kotlin
-package io.github.divinenickname.kotlin.utgen.core
+package com.example.demo1
 
-class TestClass {
+class MyTestClass {
 
     fun voidMethod() {
         println("VOID method")
     }
 
-    fun nonVoidMethod(): String {
-        return "abcd"
+    fun nonVoidMethod(): Boolean? {
+        return false
     }
 
-    public fun publicScopeMethod() {}
-
-    private fun privateMethod(int: Long): String {
-        return "private scope method"
-    }
 }
 ```
 
 Library generates code:
 ```kotlin
-package io.github.divinenickname.kotlin.utgen.core
+package com.example.demo1
 
+import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
-internal class TestClassTest {
-  private val obj: TestClassTest = TestClass()
+internal class MyTestClassTest {
+    @Test
+    public fun voidMethod_notThrowTest() {
+        val obj = MyTestClass()
 
-  @Test
-  public fun voidMethod_goldencase() {
-    TODO("Implement")
-    val actual = obj.voidMethod()
-  }
+        Assertions.assertDoesNotThrow { obj.voidMethod() }
+    }
 
-  @Test
-  public fun nonVoidMethod_goldencase() {
-    TODO("Implement")
-    val actual = obj.nonVoidMethod()
-  }
+    @Test
+    public fun nonVoidMethod_isNullTest() {
+        val obj = MyTestClass()
 
-  @Test
-  public fun publicScopeMethod_goldencase() {
-    TODO("Implement")
-    val actual = obj.publicScopeMethod()
-  }
+        Assertions.assertNull( obj.nonVoidMethod() )
+    }
+
+    @Test
+    public fun nonVoidMethod_isTrue() {
+        val obj = MyTestClass()
+
+        val actual = obj.nonVoidMethod()
+
+        Assertions.assertTrue(actual)
+    }
+
+    @Test
+    public fun nonVoidMethod_isFalse() {
+        val obj = MyTestClass()
+
+        val actual = obj.nonVoidMethod()
+
+        Assertions.assertFalse(actual)
+    }
+
+    @Test
+    public fun nonVoidMethodTest() {
+        val obj = MyTestClass()
+
+        val expected = Boolean()
+        val actual = obj.nonVoidMethod()
+
+        Assertions.assertEquals(expected, actual)
+    }
 }
 ```
+
+See [EXAMPLES.md](EXAMPLES.md) for more examples.
+
 
 ## See also
 - Idea IDE plugin: https://github.com/divinenickname/utgen-kotlin-idea-plugin
