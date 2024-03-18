@@ -4,6 +4,15 @@ import com.squareup.kotlinpoet.PropertySpec
 import io.github.divinenickname.kotlin.utgen.core.domain.Method
 import io.github.divinenickname.kotlin.utgen.core.domain.codeblocks.DefaultAssertionCodeBlock
 
+/**
+ * Logic based on CNF 'Conjunctive normal form'. Truth table:
+ *
+ * | Unit (x) | Nullable (y) | Boolean (z) | Fun | CNF          |
+ * |----------|--------------|-------------|-----|--------------|
+ * | 1        | 0            | 0           | 0   | !x OR y OR z |
+ * | 0        | 1            | 1           | 0   | !y OR !z     |
+ * | 0        | 0            | 1           | 0   | y OR !z      |
+ */
 class DefaultAssertionChain(
     objProperty: PropertySpec,
     val method: Method
