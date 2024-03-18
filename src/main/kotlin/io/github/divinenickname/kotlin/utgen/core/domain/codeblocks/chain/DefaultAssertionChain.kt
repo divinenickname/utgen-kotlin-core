@@ -14,10 +14,7 @@ class DefaultAssertionChain(
     method = method
 ) {
 
-    override fun isValid(): Boolean = (!x() || !y() || !z())
-            && (!x() || y() || !z())
-            && (x() || !y() || !z())
-            && (x() || y() || !z())
+    override fun isValid(): Boolean = (!x() || y() ||z()) && (!y() || !z()) && (y() || !z())
 
     private fun x() = method.returnValue() == "Unit"
     private fun y() = method.isNullable()
