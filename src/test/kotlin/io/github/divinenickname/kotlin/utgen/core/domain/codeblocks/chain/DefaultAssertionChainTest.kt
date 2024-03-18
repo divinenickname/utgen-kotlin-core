@@ -27,4 +27,11 @@ class DefaultAssertionChainTest {
 
         actual shouldBe false
     }
+
+    @Test
+    fun isValid_booleanFalse() {
+        val actual = DefaultAssertionChain(Mockito.mock(), Method("testName", "Boolean")).isValid()
+
+        actual shouldBe false
+    }
 }
