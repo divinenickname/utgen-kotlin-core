@@ -22,15 +22,29 @@ class DefaultAssertionChainTest {
     }
 
     @Test
-    fun isValid_shouldFalse() {
+    fun isValid_primitiveNullableShouldFalse() {
+        val actual = DefaultAssertionChain(Mockito.mock(), Method("testName", "Boolean?")).isValid()
+
+        actual shouldBe false
+    }
+
+    @Test
+    fun isValid_unitShouldFalse() {
         val actual = DefaultAssertionChain(Mockito.mock(), Method("testName", "Unit")).isValid()
 
         actual shouldBe false
     }
 
     @Test
-    fun isValid_booleanFalse() {
+    fun isValid_booleanShouldFalse() {
         val actual = DefaultAssertionChain(Mockito.mock(), Method("testName", "Boolean")).isValid()
+
+        actual shouldBe false
+    }
+
+    @Test
+    fun isValid_primitivesShouldFalse() {
+        val actual = DefaultAssertionChain(Mockito.mock(), Method("testName", "Int")).isValid()
 
         actual shouldBe false
     }

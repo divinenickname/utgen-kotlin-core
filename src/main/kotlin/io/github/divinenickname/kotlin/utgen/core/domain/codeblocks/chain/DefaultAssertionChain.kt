@@ -4,15 +4,7 @@ import com.squareup.kotlinpoet.PropertySpec
 import io.github.divinenickname.kotlin.utgen.core.domain.Method
 import io.github.divinenickname.kotlin.utgen.core.domain.codeblocks.DefaultAssertionCodeBlock
 
-/**
- * Logic based on CNF 'Conjunctive normal form'. Truth table:
- *
- * | Unit (x) | Nullable (y) | Boolean (z) | Fun | CNF          |
- * |----------|--------------|-------------|-----|--------------|
- * | 1        | 0            | 0           | 0   | !x OR y OR z |
- * | 0        | 1            | 1           | 0   | !y OR !z     |
- * | 0        | 0            | 1           | 0   | y OR !z      |
- */
+
 class DefaultAssertionChain(
     objProperty: PropertySpec,
     val method: Method
@@ -23,9 +15,11 @@ class DefaultAssertionChain(
     method = method
 ) {
 
-    override fun isValid(): Boolean = (!x() || y() ||z()) && (!y() || !z()) && (y() || !z())
+    private val primitives = setOf("Byte", "Short", "Int", "Long", "Float", "Double", "Char", "Boolean")
 
-    private fun x() = method.returnValue() == "Unit"
-    private fun y() = method.isNullable()
-    private fun z() = method.returnValue() == "Boolean"
+    override fun isValid(): Boolean = !isUnitType() && !isPrimitive() && !(isPrimitive() && isNullable())
+
+    private fun isUnitType() = method.returnValue() == "Unit"
+    private fun isNullable() = method.isNullable()
+    private fun isPrimitive() = primitives.contains(method.returnValue())
 }
