@@ -1,11 +1,15 @@
 [![GitHub license](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](https://www.apache.org/licenses/LICENSE-2.0)
 ![main branch build](https://github.com/divinenickname/utgen-kotlin-core/actions/workflows/mainbranch-build.yml/badge.svg)
-[![Maven](https://img.shields.io/maven-metadata/v?metadataUrl=https%3A%2F%2Frepo1.maven.org%2Fmaven2%2Fio%2Fgithub%2Fdivinenickname%2Fkotlin%2Futgen%2Futgen-core%2Fmaven-metadata.xml&style=flat&color=green)](https://central.sonatype.com/artifact/io.github.divinenickname.kotlin.utgen/utgen-core)
+![Maven metadata URL](https://img.shields.io/maven-metadata/v?metadataUrl=https%3A%2F%2Frepo1.maven.org%2Fmaven2%2Fio%2Fgithub%2Fdivinenickname%2Fkotlin%2Futgen%2Futgen-core%2Fmaven-metadata.xml&style=flat&label=sonatype-central&color=green)
+![Maven Central Version](https://img.shields.io/maven-central/v/io.github.divinenickname.kotlin.utgen/utgen-core?style=flat&color=green)
+
 
 <img width="100px" src="./logo.svg"  alt="Logo image. Red circle with letter U inside."/><br>
 # UTGen-core 
 
-Simple unit-tests generator for Kotlin language.
+A small library for generating UNIT tests for the Kotlin language. Save time with the code generator by focusing more 
+on truly important matters. The library covers common scenarios and generates test cases based on your code. All you 
+need to do is provide the expected value.
 
 ## Features
 - Default case with return value
@@ -17,7 +21,7 @@ Simple unit-tests generator for Kotlin language.
 ## How to
 Add dependency:
 ```kotlin
-implementation("io.github.divinenickname.kotlin.utgen:utgen-core:1.1.1")
+implementation("io.github.divinenickname.kotlin.utgen:utgen-core:1.3.1")
 ```
 
 After that you can start generating test using two simple methods:
@@ -40,14 +44,9 @@ package com.example.demo1
 
 class MyTestClass {
 
-    fun voidMethod() {
-        println("VOID method")
+    fun nonVoid(): ObjClass {
+        return ObjClass()
     }
-
-    fun nonVoidMethod(): Boolean? {
-        return false
-    }
-
 }
 ```
 
@@ -59,52 +58,25 @@ import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
 internal class MyTestClassTest {
-    @Test
-    public fun voidMethod_notThrowTest() {
-        val obj = MyTestClass()
+  @Test
+  public fun nonVoidTest() {
+    val obj = MyTestClass()
 
-        Assertions.assertDoesNotThrow { obj.voidMethod() }
-    }
+    val expected = ObjClass()
+    val actual = obj.nonVoid()
 
-    @Test
-    public fun nonVoidMethod_isNullTest() {
-        val obj = MyTestClass()
-
-        Assertions.assertNull( obj.nonVoidMethod() )
-    }
-
-    @Test
-    public fun nonVoidMethod_isTrue() {
-        val obj = MyTestClass()
-
-        val actual = obj.nonVoidMethod()
-
-        Assertions.assertTrue(actual)
-    }
-
-    @Test
-    public fun nonVoidMethod_isFalse() {
-        val obj = MyTestClass()
-
-        val actual = obj.nonVoidMethod()
-
-        Assertions.assertFalse(actual)
-    }
-
-    @Test
-    public fun nonVoidMethodTest() {
-        val obj = MyTestClass()
-
-        val expected = Boolean()
-        val actual = obj.nonVoidMethod()
-
-        Assertions.assertEquals(expected, actual)
-    }
+    Assertions.assertEquals(expected, actual)
+  }
 }
 ```
 
-See [EXAMPLES.md](EXAMPLES.md) for more examples.
+See more at: [EXAMPLES.md](EXAMPLES.md)
 
+## Depends on
+
+- [ANTLR Kotlin grammar](https://github.com/Kotlin/kotlin-spec)
+- [Kotlinpoet for codegeneration](https://github.com/square/kotlinpoet)
+- junit-jupiter-api
 
 ## See also
-- Idea IDE plugin: https://github.com/divinenickname/utgen-kotlin-idea-plugin
+- [Idea IDE plugin](https://github.com/divinenickname/utgen-kotlin-idea-plugin)
