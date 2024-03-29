@@ -70,6 +70,11 @@ internal class MyTestClassTest {
 
 See more at: [EXAMPLES.md](EXAMPLES.md)
 
+## Depends on
+
+- [ANTLR Kotlin grammar](https://github.com/Kotlin/kotlin-spec)
+- [Kotlinpoet for codegeneration](https://github.com/square/kotlinpoet)
+- junit-jupiter-api
 
 ## See also
 - Idea IDE plugin: https://github.com/divinenickname/utgen-kotlin-idea-plugin
