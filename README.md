@@ -7,7 +7,9 @@
 <img width="100px" src="./logo.svg"  alt="Logo image. Red circle with letter U inside."/><br>
 # UTGen-core 
 
-Simple unit-tests generator for Kotlin language.
+A small library for generating UNIT tests for the Kotlin language. Save time with the code generator by focusing more 
+on truly important matters. The library covers common scenarios and generates test cases based on your code. All you 
+need to do is provide the expected value.
 
 ## Features
 - Default case with return value
