@@ -77,4 +77,4 @@ See more at: [EXAMPLES.md](EXAMPLES.md)
 - junit-jupiter-api
 
 ## See also
-- Idea IDE plugin: https://github.com/divinenickname/utgen-kotlin-idea-plugin
+- [Idea IDE plugin](https://github.com/divinenickname/utgen-kotlin-idea-plugin)
