@@ -19,7 +19,7 @@ Simple unit-tests generator for Kotlin language.
 ## How to
 Add dependency:
 ```kotlin
-implementation("io.github.divinenickname.kotlin.utgen:utgen-core:1.1.1")
+implementation("io.github.divinenickname.kotlin.utgen:utgen-core:1.3.1")
 ```
 
 After that you can start generating test using two simple methods:
@@ -42,14 +42,9 @@ package com.example.demo1
 
 class MyTestClass {
 
-    fun voidMethod() {
-        println("VOID method")
+    fun nonVoid(): ObjClass {
+        return ObjClass()
     }
-
-    fun nonVoidMethod(): Boolean? {
-        return false
-    }
-
 }
 ```
 
@@ -61,51 +56,19 @@ import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
 internal class MyTestClassTest {
-    @Test
-    public fun voidMethod_notThrowTest() {
-        val obj = MyTestClass()
+  @Test
+  public fun nonVoidTest() {
+    val obj = MyTestClass()
 
-        Assertions.assertDoesNotThrow { obj.voidMethod() }
-    }
+    val expected = ObjClass()
+    val actual = obj.nonVoid()
 
-    @Test
-    public fun nonVoidMethod_isNullTest() {
-        val obj = MyTestClass()
-
-        Assertions.assertNull( obj.nonVoidMethod() )
-    }
-
-    @Test
-    public fun nonVoidMethod_isTrue() {
-        val obj = MyTestClass()
-
-        val actual = obj.nonVoidMethod()
-
-        Assertions.assertTrue(actual)
-    }
-
-    @Test
-    public fun nonVoidMethod_isFalse() {
-        val obj = MyTestClass()
-
-        val actual = obj.nonVoidMethod()
-
-        Assertions.assertFalse(actual)
-    }
-
-    @Test
-    public fun nonVoidMethodTest() {
-        val obj = MyTestClass()
-
-        val expected = Boolean()
-        val actual = obj.nonVoidMethod()
-
-        Assertions.assertEquals(expected, actual)
-    }
+    Assertions.assertEquals(expected, actual)
+  }
 }
 ```
 
-See [EXAMPLES.md](EXAMPLES.md) for more examples.
+See more at: [EXAMPLES.md](EXAMPLES.md)
 
 
 ## See also
