@@ -4,6 +4,9 @@ import io.github.divinenickname.kotlin.utgen.core.antlr.KotlinParser
 import io.github.divinenickname.kotlin.utgen.core.antlr.KotlinParserBaseListener
 import io.github.divinenickname.kotlin.utgen.core.domain.Method
 
+/**
+ * ANTLR parser extractor. Find and aggregate public methods
+ */
 class MethodExtractor : KotlinParserBaseListener() {
     val methods = mutableSetOf<Method>()
 
