@@ -7,6 +7,9 @@ import io.github.divinenickname.kotlin.utgen.core.domain.Method
 import io.github.divinenickname.kotlin.utgen.core.domain.codeblocks.DefaultAssertionCodeBlock
 import org.junit.jupiter.api.Test
 
+/**
+ * The heart of chain applying. If you add new chain you have to add it to [MethodChainProcessor.codeChain] set.
+ */
 class MethodChainProcessor(private val objProperty: PropertySpec, private val method: Method) {
     private val codeChain = setOf(
         ::AssertDoesNotThrowChain,
@@ -17,6 +20,9 @@ class MethodChainProcessor(private val objProperty: PropertySpec, private val me
         ::DefaultAssertionChain,
     ).map { it(objProperty, method) }
 
+    /**
+     * Generate code blocks for valid cases. O(n) complexity.
+     */
     fun generateCodeBlocks(): Set<FunSpec> = codeChain
         .filter { it.isValid() }
         .map(this::funSpec)
@@ -24,6 +30,9 @@ class MethodChainProcessor(private val objProperty: PropertySpec, private val me
         ?: setOf(defaultFunSpec())
 
 
+    /**
+     * Create test method with annotation and object initialization.
+     */
     private fun funSpec(codeChain: CodeChain): FunSpec {
         return FunSpec.builder(codeChain.testMethodName())
             .addAnnotation(Test::class)
@@ -32,6 +41,9 @@ class MethodChainProcessor(private val objProperty: PropertySpec, private val me
             .build()
     }
 
+    /**
+     * The default test method in case no other cases were applied.
+     */
     private fun defaultFunSpec(): FunSpec = FunSpec.builder(method.name)
         .addAnnotation(Test::class)
         .addCode(CodeBlock.of("val obj = ${objProperty.initializer}\n\n"))

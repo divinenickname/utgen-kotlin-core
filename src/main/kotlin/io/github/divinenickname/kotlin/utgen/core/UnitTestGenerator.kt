@@ -1,7 +1,6 @@
 package io.github.divinenickname.kotlin.utgen.core
 
 import com.squareup.kotlinpoet.FileSpec
-import com.squareup.kotlinpoet.Import
 import io.github.divinenickname.kotlin.utgen.core.antlr.KotlinLexer
 import io.github.divinenickname.kotlin.utgen.core.antlr.KotlinParser
 import io.github.divinenickname.kotlin.utgen.core.domain.OriginalClass
@@ -9,10 +8,12 @@ import io.github.divinenickname.kotlin.utgen.core.domain.OutputFile
 import io.github.divinenickname.kotlin.utgen.core.domain.TestClass
 import org.antlr.v4.runtime.CharStreams
 import org.antlr.v4.runtime.CommonTokenStream
-import org.junit.jupiter.api.Assertions
 import java.io.File
 import java.nio.file.Path
 
+/**
+ * Generate whole unit-test class.
+ */
 class UnitTestGenerator {
 
     /**
@@ -40,6 +41,7 @@ class UnitTestGenerator {
      *
      * @param path Kotlin source file
      */
+    @Deprecated("Useless method, should be deleted in 1.4.0")
     fun generateAndSave(path: Path) {
         val outputFile = OutputFile(path.toString())
         generate(path).writeTo(outputFile)
