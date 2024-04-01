@@ -4,7 +4,10 @@ import com.squareup.kotlinpoet.PropertySpec
 import io.github.divinenickname.kotlin.utgen.core.domain.Method
 import io.github.divinenickname.kotlin.utgen.core.domain.codeblocks.DefaultAssertionCodeBlock
 
-
+/**
+ * This assertion chain serves as the base case, utilized when no other applicable case is available.
+ * Additionally, it functions as an extra case for certain types.
+ */
 class DefaultAssertionChain(
     objProperty: PropertySpec,
     val method: Method
