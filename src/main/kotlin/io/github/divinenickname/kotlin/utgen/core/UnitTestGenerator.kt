@@ -11,6 +11,9 @@ import org.antlr.v4.runtime.CommonTokenStream
 import java.io.File
 import java.nio.file.Path
 
+/**
+ * Generate whole unit-test class.
+ */
 class UnitTestGenerator {
 
     /**
@@ -38,7 +41,7 @@ class UnitTestGenerator {
      *
      * @param path Kotlin source file
      */
-    @Deprecated("Useless method, should be deleted.")
+    @Deprecated("Useless method, should be deleted in 1.4.0")
     fun generateAndSave(path: Path) {
         val outputFile = OutputFile(path.toString())
         generate(path).writeTo(outputFile)
