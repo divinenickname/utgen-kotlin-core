@@ -28,6 +28,7 @@ jobs:
         uses: cicirello/jacoco-badge-generator@v2
         with:
           jacoco-csv-file: build/reports/jacoco/test/jacocoTestReport.csv
+          fail-if-coverage-less-than: 60
 
       - name: Log coverage percentage
         run: |
