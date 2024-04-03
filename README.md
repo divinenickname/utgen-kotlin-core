@@ -2,7 +2,7 @@
 ![main branch build](https://github.com/divinenickname/utgen-kotlin-core/actions/workflows/mainbranch-build.yml/badge.svg)
 ![Maven metadata URL](https://img.shields.io/maven-metadata/v?metadataUrl=https%3A%2F%2Frepo1.maven.org%2Fmaven2%2Fio%2Fgithub%2Fdivinenickname%2Fkotlin%2Futgen%2Futgen-core%2Fmaven-metadata.xml&style=flat&label=sonatype-central&color=green)
 ![Maven Central Version](https://img.shields.io/maven-central/v/io.github.divinenickname.kotlin.utgen/utgen-core?style=flat&color=green)
-
+![Coverage](.github/badges/jacoco.svg)
 
 <img width="100px" src="./logo.svg"  alt="Logo image. Red circle with letter U inside."/><br>
 # UTGen-core 
