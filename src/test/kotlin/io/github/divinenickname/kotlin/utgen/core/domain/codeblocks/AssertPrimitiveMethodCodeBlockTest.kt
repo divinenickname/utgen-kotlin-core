@@ -13,7 +13,7 @@ internal class AssertPrimitiveMethodCodeBlockTest {
     fun codeBlock_goldencase() {
         val actual = AssertPrimitiveMethodCodeBlock(propSpec, Method("test", "Boolean")).codeBlock()
         val expected = """
-      val expected:Boolean = TODO('Add value here')
+      val expected: Boolean = TODO('boolean')
       val actual = obj.test()
 
       Assertions.assertEquals(expected, actual)

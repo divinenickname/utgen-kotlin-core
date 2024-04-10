@@ -1,0 +1,26 @@
+package io.github.divinenickname.kotlin.utgen.core
+
+import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Test
+
+internal class StringTestCaseTest {
+  @Test
+  public fun stringWithoutParenthesesTest() {
+    val obj = StringTestCase()
+
+    val expected: String = TODO('string')
+    val actual = obj.stringWithoutParentheses()
+
+    Assertions.assertEquals(expected, actual)
+  }
+
+  @Test
+  public fun stringWithParenthesesTest() {
+    val obj = StringTestCase()
+
+    val expected: String = TODO('string')
+    val actual = obj.stringWithParentheses()
+
+    Assertions.assertEquals(expected, actual)
+  }
+}
