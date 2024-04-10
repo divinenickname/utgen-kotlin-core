@@ -18,7 +18,7 @@ class DefaultAssertionChain(
     method = method
 ) {
 
-    private val primitives = setOf("Byte", "Short", "Int", "Long", "Float", "Double", "Char", "Boolean")
+    private val primitives = setOf("Byte", "Short", "Int", "Long", "Float", "Double", "Char", "Boolean", "String")
 
     override fun isValid(): Boolean = !isUnitType() && !isPrimitive() && !(isPrimitive() && isNullable())
 

@@ -17,7 +17,7 @@ class AssertPrimitiveMethodChain(
     objProperty = objProperty,
     method = method
 ) {
-    private val primitives = setOf("Byte", "Short", "Int", "Long", "Float", "Double", "Char")
+    private val primitives = setOf("Byte", "Short", "Int", "Long", "Float", "Double", "Char", "String")
 
     override fun isValid(): Boolean = primitives.contains(method.returnValue())
 }
