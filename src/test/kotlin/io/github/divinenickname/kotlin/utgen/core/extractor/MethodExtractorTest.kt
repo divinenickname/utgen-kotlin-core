@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test
 import java.io.File
 
 class MethodExtractorTest {
-    private val input = File("src/main/kotlin/io/github/divinenickname/kotlin/utgen/core/TestClass.kt")
+    private val input = File("src/test/resources/TestClass.kt")
         .readText()
 
     @Test

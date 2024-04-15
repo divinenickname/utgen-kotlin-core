@@ -13,7 +13,7 @@ abstract class AbstractClassTest(
     private val expectedPackageName: String,
     private val expectedPublicMethods: Set<Method>
 ) {
-    private val file =  File("src/main/kotlin/io/github/divinenickname/kotlin/utgen/core/TestClass.kt")
+    private val file =  File("src/test/resources/TestClass.kt")
     private val lexer = file.readText().let(CharStreams::fromString).let(::KotlinLexer)
     private val parser = KotlinParser(CommonTokenStream(lexer))
     val ctx = parser.kotlinFile()
