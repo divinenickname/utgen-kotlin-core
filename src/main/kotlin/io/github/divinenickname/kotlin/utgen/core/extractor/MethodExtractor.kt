@@ -11,7 +11,7 @@ class MethodExtractor : KotlinParserBaseListener() {
     val methods = mutableSetOf<Method>()
 
     override fun enterFunctionDeclaration(ctx: KotlinParser.FunctionDeclarationContext) {
-        ctx.takeIf { it.modifiers() == null || it.modifiers().text != "private"}
+        ctx.takeIf { it.modifiers() == null || it.modifiers().text != "private" }
             ?.let {
                 Method(name = ctx.simpleIdentifier().text, returnValue = ctx.type()?.text ?: "Unit")
                     .apply(methods::add)

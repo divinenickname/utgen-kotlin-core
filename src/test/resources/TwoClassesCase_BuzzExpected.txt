@@ -1,0 +1,16 @@
+package io.github.divinenickname.kotlin.utgen.core
+
+import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Test
+
+internal class BuzzClassTest {
+  @Test
+  public fun buzzTest() {
+    val obj = BuzzClass()
+
+    val expected: Int = TODO('int')
+    val actual = obj.buzz()
+
+    Assertions.assertEquals(expected, actual)
+  }
+}

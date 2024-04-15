@@ -1,0 +1,24 @@
+package io.github.divinenickname.kotlin.utgen.core
+
+import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Test
+
+internal class FizzClassTest {
+  @Test
+  public fun fizz_isTrue() {
+    val obj = FizzClass()
+
+    val actual = obj.fizz()
+
+    Assertions.assertTrue(actual)
+  }
+
+  @Test
+  public fun fizz_isFalse() {
+    val obj = FizzClass()
+
+    val actual = obj.fizz()
+
+    Assertions.assertFalse(actual)
+  }
+}
