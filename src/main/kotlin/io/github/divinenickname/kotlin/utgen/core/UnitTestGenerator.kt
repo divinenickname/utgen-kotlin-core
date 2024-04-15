@@ -21,11 +21,9 @@ class UnitTestGenerator {
      *
      * @param path Kotlin source file
      */
+    @Deprecated("This method is not supported multiple classes, use generateAll")
     fun generate(path: Path): FileSpec {
-        val file = File(path.toUri())
-        val lexer = file.readText().let(CharStreams::fromString).let(::KotlinLexer)
-        val parser = KotlinParser(CommonTokenStream(lexer))
-        val ctx = parser.kotlinFile()
+        val ctx = parse(path)
 
         val testClass = OriginalClass(ctx).let(::TestClass)
 
@@ -33,6 +31,37 @@ class UnitTestGenerator {
             .addType(testClass.toTypeSpec())
             .addImport("org.junit.jupiter.api", "Assertions")
             .build()
+    }
+
+    /**
+     * Generate test classes for all classes in .kt file.
+     */
+    fun generateAll(path: Path): List<FileSpec> {
+        val ctx = parse(path)
+        val fileSpecs = mutableListOf<FileSpec>()
+
+        for (idx in 0..<ctx.topLevelObject().size) {
+            OriginalClass(ctx, idx).let(::TestClass).let {
+                FileSpec.builder(it.packageName(), it.simpleName())
+                    .addType(it.toTypeSpec())
+                    .addImport("org.junit.jupiter.api", "Assertions")
+                    .build()
+                    .also {
+                        println()
+                    }
+
+            }.also(fileSpecs::add)
+        }
+
+        return fileSpecs
+    }
+
+    private fun parse(path: Path): KotlinParser.KotlinFileContext {
+        val file = File(path.toUri())
+        val lexer = file.readText().let(CharStreams::fromString).let(::KotlinLexer)
+        val parser = KotlinParser(CommonTokenStream(lexer))
+
+        return parser.kotlinFile()
     }
 
     /**
