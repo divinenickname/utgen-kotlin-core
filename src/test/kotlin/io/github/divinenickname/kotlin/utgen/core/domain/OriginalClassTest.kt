@@ -8,13 +8,14 @@ import org.antlr.v4.runtime.CharStreams
 import org.antlr.v4.runtime.CommonTokenStream
 import org.junit.jupiter.api.Test
 import java.io.File
+import java.nio.file.Path
 
 class OriginalClassTest {
     private val expectedSimpleName = "TestClass"
     private val expectedPackageName = "io.github.divinenickname.kotlin.utgen.core"
     private val expectedPublicMethods = setOf("voidMethod", "nonVoidMethod", "publicScopeMethod").map(::Method).toSet()
 
-    private val file =  File("src/main/kotlin/io/github/divinenickname/kotlin/utgen/core/TestClass.kt")
+    private val file =  File("src/test/resources/TestClass.kt")
     private val lexer = file.readText().let(CharStreams::fromString).let(::KotlinLexer)
     private val parser = KotlinParser(CommonTokenStream(lexer))
     private val ctx = parser.kotlinFile()
