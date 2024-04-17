@@ -34,9 +34,9 @@ jobs:
           echo GPG_PASSPHRASE=${{ secrets.GPG_PASSPHRASE }} >> gradle.properties
           cat gradle.properties
 
-      - name: Publish to Sonartype Cental
+      - name: Publish to Sonatype Central
         env:
           GIT_TAG: ${{github.ref_name}}
-          SONARTYPE_USER: ${{ secrets.SONARTYPE_USER }}
-          SONARTYPE_PASSWORD: ${{ secrets.SONARTYPE_PASSWORD }}
+          SONATYPE_USER: ${{ secrets.SONATYPE_TOKEN_USER }}
+          SONATYPE_PASSWORD: ${{ secrets.SONATYPE_TOKEN_PASSWORD}}
         run: ./gradlew publishToCentralPortal
