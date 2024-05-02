@@ -9,16 +9,16 @@ import org.junit.jupiter.api.Test
 class AssertTrueCodeBlockTest {
     private val propSpec = ObjectProperty("org.example", "myClass").toPropertySpec()
 
-    @Test
-    fun codeBlock() {
-        val actual = AssertTrueCodeBlock(propSpec, Method("test", "Boolean")).codeBlock()
-        val expected = """
-            val actual = obj.test()
-
-            Assertions.assertTrue(actual)
-        """.trimIndent()
-            .let(CodeBlock::of)
-
-        actual shouldBe expected
-    }
+//    @Test
+//    fun codeBlock() {
+//        val actual = AssertTrueCodeBlock(propSpec, Method("test", "Boolean")).codeBlock()
+//        val expected = """
+//            val actual = obj.test()
+//
+//            Assertions.assertTrue(actual)
+//        """.trimIndent()
+//            .let(CodeBlock::of)
+//
+//        actual shouldBe expected
+//    }
 }

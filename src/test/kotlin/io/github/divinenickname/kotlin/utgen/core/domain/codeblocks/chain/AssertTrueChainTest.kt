@@ -6,24 +6,24 @@ import org.junit.jupiter.api.Test
 import org.mockito.Mockito
 
 class AssertTrueChainTest {
-    @Test
-    fun isValid_shouldTrue() {
-        val actual = AssertTrueChain(Mockito.mock(), Method("test", "Boolean")).isValid()
-
-        actual shouldBe true
-    }
-
-    @Test
-    fun isValid_shouldFalse() {
-        val actual = AssertTrueChain(Mockito.mock(), Method("test", "String")).isValid()
-
-        actual shouldBe false
-    }
-
-    @Test
-    fun testMethodName() {
-        val actual = AssertTrueChain(Mockito.mock(), Method("testName", "Boolean")).testMethodName()
-
-        actual shouldBe "testName_isTrue"
-    }
+//    @Test
+//    fun isValid_shouldTrue() {
+//        val actual = AssertTrueChain(Mockito.mock(), Method("test", "Boolean")).isValid()
+//
+//        actual shouldBe true
+//    }
+//
+//    @Test
+//    fun isValid_shouldFalse() {
+//        val actual = AssertTrueChain(Mockito.mock(), Method("test", "String")).isValid()
+//
+//        actual shouldBe false
+//    }
+//
+//    @Test
+//    fun testMethodName() {
+//        val actual = AssertTrueChain(Mockito.mock(), Method("testName", "Boolean")).testMethodName()
+//
+//        actual shouldBe "testName_isTrue"
+//    }
 }

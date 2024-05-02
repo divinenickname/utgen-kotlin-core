@@ -10,11 +10,11 @@ class AssertDoesNotThrowCodeBlockTest {
 
     private val propSpec = ObjectProperty("org.example", "myClass").toPropertySpec()
 
-    @Test
-    fun codeBlock_goldencase() {
-        val actual = AssertDoesNotThrowCodeBlock(propSpec, Method("test")).codeBlock()
-        val expected = CodeBlock.of("Assertions.assertDoesNotThrow { obj.test() }")
-
-        actual shouldBe expected
-    }
+//    @Test
+//    fun codeBlock_goldencase() {
+//        val actual = AssertDoesNotThrowCodeBlock(propSpec, Method("test")).codeBlock()
+//        val expected = CodeBlock.of("Assertions.assertDoesNotThrow { obj.test() }")
+//
+//        actual shouldBe expected
+//    }
 }

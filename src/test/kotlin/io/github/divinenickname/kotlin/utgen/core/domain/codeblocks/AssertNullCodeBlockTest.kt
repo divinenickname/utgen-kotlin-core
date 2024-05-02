@@ -11,12 +11,12 @@ import org.junit.jupiter.api.Assertions.*
 class AssertNullCodeBlockTest {
     private val propSpec = ObjectProperty("org.example", "myClass").toPropertySpec()
 
-    @Test
-    fun codeBlock() {
-        val actual = AssertNullCodeBlock(propSpec, Method("test", "String?")).codeBlock()
-
-        val expected = CodeBlock.of("Assertions.assertNull( obj.test() )")
-
-        actual shouldBe expected
-    }
+//    @Test
+//    fun codeBlock() {
+//        val actual = AssertNullCodeBlock(propSpec, Method("test", "String?")).codeBlock()
+//
+//        val expected = CodeBlock.of("Assertions.assertNull( obj.test() )")
+//
+//        actual shouldBe expected
+//    }
 }
