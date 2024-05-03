@@ -1,6 +1,5 @@
 package io.github.divinenickname.kotlin.utgen.core
 
-@Suppress
 /**
  * Class only for testing parser and codegen.
  */
