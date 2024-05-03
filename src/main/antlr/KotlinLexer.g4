@@ -6,12 +6,7 @@ lexer grammar KotlinLexer;
 
 import UnicodeClasses;
 
-
-
 // SECTION: lexicalGeneral
-REQUIRE
-    : 'require'
-    ;
 
 ShebangLine
     : '#!' ~[\r\n]*
