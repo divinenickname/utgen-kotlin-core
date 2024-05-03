@@ -13,7 +13,6 @@ internal class DefaultTestCaseTest {
 
     private val objProperty = ObjectProperty("org.example", "MyClass")
 
-
     @Test
     fun canApply_isTrue() {
         val obj = DefaultTestCase(objProperty, Method("primitive", "Object"))
