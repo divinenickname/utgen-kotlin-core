@@ -19,7 +19,7 @@ class DoesNotThrowTestCase(
         if (!canApply()) return emptySet()
 
         return TestMethod(
-            testMethodName = "_notThrowTest",
+            testMethodName = "${method.name}_notThrowTest",
             propertySpec = objProperty.toPropertySpec(),
             codeBlock = CodeBlock.of("Assertions.assertDoesNotThrow { ${objProperty.toPropertySpec().name}.${method.name}() }")
         ).funSpec().let { setOf(it) }
