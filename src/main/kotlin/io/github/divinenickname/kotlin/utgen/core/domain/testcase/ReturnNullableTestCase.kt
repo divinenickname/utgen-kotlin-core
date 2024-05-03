@@ -14,16 +14,14 @@ class ReturnNullableTestCase(
 
     override fun canApply(): Boolean = method.isNullable()
 
-    private fun execute(): CodeBlock = CodeBlock
-        .of("Assertions.assertNull( ${objProperty.toPropertySpec().name}.${method.name}() )")
-
     override fun funSpecs(): Set<FunSpec> {
         if (!canApply()) return emptySet()
 
         return TestMethod(
             testMethodName = "${method.name}_isNullTest",
             propertySpec = objProperty.toPropertySpec(),
-            codeBlock = execute()
+            codeBlock = CodeBlock
+                .of("Assertions.assertNull( ${objProperty.toPropertySpec().name}.${method.name}() )")
         ).funSpec().let { setOf(it) }
     }
 }
