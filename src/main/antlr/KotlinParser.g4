@@ -318,7 +318,7 @@ statements
     ;
 
 statement
-    : (label | annotation)* ( declaration | assignment | loopStatement | expression)
+    : (label | annotation)* ( declaration | assignment | loopStatement | requireCall | expression)
     ;
 
 label
@@ -369,6 +369,10 @@ semis
 
 expression
     : disjunction
+    ;
+
+requireCall
+    : REQUIRE '(' expression ')'
     ;
 
 disjunction
