@@ -2,13 +2,11 @@ package io.github.divinenickname.kotlin.utgen.core.domain
 
 import io.github.divinenickname.kotlin.utgen.core.antlr.KotlinLexer
 import io.github.divinenickname.kotlin.utgen.core.antlr.KotlinParser
-import io.kotest.matchers.maps.shouldContainAll
 import io.kotest.matchers.shouldBe
 import org.antlr.v4.runtime.CharStreams
 import org.antlr.v4.runtime.CommonTokenStream
 import org.junit.jupiter.api.Test
 import java.io.File
-import java.nio.file.Path
 
 class OriginalClassTest {
     private val expectedSimpleName = "TestClass"
