@@ -19,13 +19,14 @@ class MethodExtractorTest {
         val expected = setOf(
             Method("voidMethod"),
             Method("publicScopeMethod"),
-            Method("nonVoidMethod", "String")
+            Method("nonVoidMethod", "String"),
         )
 
         val lexer = KotlinLexer(CharStreams.fromString(input))
         val parser = KotlinParser(CommonTokenStream(lexer))
 
         val kotlinFileContext = parser.kotlinFile()
+        println(kotlinFileContext.toStringTree())
         val methodExtractor = MethodExtractor()
 
         ParseTreeWalker().walk(methodExtractor, kotlinFileContext)

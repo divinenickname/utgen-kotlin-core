@@ -2,7 +2,7 @@ package io.github.divinenickname.kotlin.utgen.core.domain
 
 import com.squareup.kotlinpoet.KModifier
 import com.squareup.kotlinpoet.TypeSpec
-import io.github.divinenickname.kotlin.utgen.core.domain.codeblocks.chain.MethodChainProcessor
+import io.github.divinenickname.kotlin.utgen.core.domain.testcase.TestCaseProcessor
 import io.github.divinenickname.kotlin.utgen.core.domain.kpoet.ObjectProperty
 
 /**
@@ -30,14 +30,14 @@ class TestClass(
         publicMethods = originalClass.publicMethods()
     )
 
-    private val objProperty = ObjectProperty(packageName, originalClassName).toPropertySpec()
+    private val objProperty = ObjectProperty(packageName, originalClassName)
 
     /**
      * Generate test class.
      */
     fun toTypeSpec(): TypeSpec {
         val funSpecs = publicMethods.map {
-            MethodChainProcessor(objProperty, it).generateCodeBlocks()
+            TestCaseProcessor(objProperty, it).generateCodeBlocks()
         }.flatten().toSet()
 
         return TypeSpec
