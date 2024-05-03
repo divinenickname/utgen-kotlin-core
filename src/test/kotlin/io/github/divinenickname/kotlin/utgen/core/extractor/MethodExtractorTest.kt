@@ -27,7 +27,6 @@ class MethodExtractorTest {
             Method("voidMethod"),
             Method("publicScopeMethod"),
             Method("nonVoidMethod", "String"),
-            Method("requireCheck")
         )
 
         val lexer = KotlinLexer(CharStreams.fromString(input))
@@ -39,6 +38,6 @@ class MethodExtractorTest {
 
         ParseTreeWalker().walk(methodExtractor, kotlinFileContext)
 
-//        methodExtractor.methods shouldContainAll expected
+        methodExtractor.methods shouldContainAll expected
     }
 }

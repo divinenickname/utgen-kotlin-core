@@ -13,7 +13,7 @@ import java.nio.file.Path
 class OriginalClassTest {
     private val expectedSimpleName = "TestClass"
     private val expectedPackageName = "io.github.divinenickname.kotlin.utgen.core"
-    private val expectedPublicMethods = setOf("voidMethod", "nonVoidMethod", "publicScopeMethod", "requireCheck").map(::Method).toSet()
+    private val expectedPublicMethods = setOf("voidMethod", "nonVoidMethod", "publicScopeMethod").map(::Method).toSet()
 
     private val file =  File("src/test/resources/TestClass.kt")
     private val lexer = file.readText().let(CharStreams::fromString).let(::KotlinLexer)

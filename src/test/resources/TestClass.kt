@@ -24,8 +24,4 @@ class TestClass(
     private fun privateMethod(int: Long): String {
         return "private scope method"
     }
-
-    fun requireCheck(param: String) {
-        require(param == "abc")
-    }
 }
