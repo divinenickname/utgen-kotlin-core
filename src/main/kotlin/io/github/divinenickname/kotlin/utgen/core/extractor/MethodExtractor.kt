@@ -13,14 +13,8 @@ class MethodExtractor : KotlinParserBaseListener() {
     override fun enterFunctionDeclaration(ctx: KotlinParser.FunctionDeclarationContext) {
         ctx.takeIf { it.modifiers() == null || it.modifiers().text != "private" }
             ?.let {
-                val require = it.functionBody()?.block()?.statements()?.statement()
-                    ?.mapNotNull { statement -> statement.requireCall()?.expression()?.text } ?: emptyList()
-
-                Method(
-                    name = ctx.simpleIdentifier().text,
-                    returnValue = ctx.type()?.text ?: "Unit",
-                    requireExpression = require
-                ).apply(methods::add)
+                Method(name = ctx.simpleIdentifier().text, returnValue = ctx.type()?.text ?: "Unit")
+                    .apply(methods::add)
             }
     }
 }
