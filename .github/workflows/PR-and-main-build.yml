@@ -1,16 +1,21 @@
 name: Build pull request
 
 on:
+  push:
+    branches:
+      - main
   pull_request:
     branches:
       - main
 
 permissions:
-  contents: write
-  pull-requests: write
+  contents: read
 
 jobs:
   build:
+    permissions:
+      pull-requests: write
+    environment: prod
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -21,10 +26,13 @@ jobs:
           java-version: 17
           distribution: 'adopt'
 
-      - name: Build
-        run: ./gradlew build
+      - name: Building
+        run: ./gradlew build -x test
 
-      - name: Add coverage to PR
+      - name: Unit-testing
+        run: ./gradlew test
+
+      - name: Adding coverage to Pull-Request
         uses: madrapps/jacoco-report@v1.6.1
         with:
           paths: |
@@ -35,11 +43,11 @@ jobs:
           title: Code Coverage
           update-comment: true
 
-      - name: Log coverage percentage
-        run: |
-          echo "coverage = ${{ steps.jacoco.outputs.coverage }}"
-          echo "branch coverage = ${{ steps.jacoco.outputs.branches }}"
-
+  codecov:
+    environment: prod
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v4.0.1
         with:
