@@ -3,6 +3,7 @@ package io.github.divinenickname.kotlin.utgen.core.domain.testcase
 import com.squareup.kotlinpoet.CodeBlock
 import com.squareup.kotlinpoet.FunSpec
 import io.github.divinenickname.kotlin.utgen.core.domain.Method
+import io.github.divinenickname.kotlin.utgen.core.domain.ReturnValue
 import io.github.divinenickname.kotlin.utgen.core.domain.kpoet.ObjectProperty
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
@@ -16,7 +17,7 @@ internal class ReturnPrimitiveTestCasesTest {
     @ParameterizedTest
     @ValueSource(strings = ["Byte", "Short", "Int", "Long", "Float", "Double", "Char", "String", "Byte?"])
     fun canApply_isTrue(returnValue: String) {
-        val obj = ReturnPrimitiveTestCases(objProperty, Method("primitive", returnValue))
+        val obj = ReturnPrimitiveTestCases(objProperty, Method("primitive", ReturnValue(className = returnValue)))
 
         val actual = obj.canApply()
 
@@ -25,7 +26,7 @@ internal class ReturnPrimitiveTestCasesTest {
 
     @Test
     fun canApply_isFalse() {
-        val obj = ReturnPrimitiveTestCases(objProperty, Method("nonPrimitive", "Any"))
+        val obj = ReturnPrimitiveTestCases(objProperty, Method("nonPrimitive", ReturnValue(className = "Any")))
 
         val actual = obj.canApply()
 
@@ -34,7 +35,7 @@ internal class ReturnPrimitiveTestCasesTest {
 
     @Test
     fun funSpecsTest() {
-        val obj = ReturnPrimitiveTestCases(objProperty, Method("primitive", "Byte"))
+        val obj = ReturnPrimitiveTestCases(objProperty, Method("primitive", ReturnValue(className = "Byte")))
 
         val expected = setOf(
             FunSpec.builder("primitiveTest")

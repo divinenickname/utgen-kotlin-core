@@ -13,7 +13,7 @@ class ReturnBooleanTestCases(
     private val method: Method,
 ) : TestCase(objProperty, method) {
 
-    override fun canApply(): Boolean = method.returnValue() == "Boolean"
+    override fun canApply(): Boolean = method.returnValue.className() == "Boolean"
 
     override fun funSpecs(): Set<FunSpec> {
         if (!canApply()) return emptySet()

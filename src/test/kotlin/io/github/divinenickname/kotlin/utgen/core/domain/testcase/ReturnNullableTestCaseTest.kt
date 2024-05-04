@@ -3,6 +3,7 @@ package io.github.divinenickname.kotlin.utgen.core.domain.testcase
 import com.squareup.kotlinpoet.CodeBlock
 import com.squareup.kotlinpoet.FunSpec
 import io.github.divinenickname.kotlin.utgen.core.domain.Method
+import io.github.divinenickname.kotlin.utgen.core.domain.ReturnValue
 import io.github.divinenickname.kotlin.utgen.core.domain.kpoet.ObjectProperty
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
@@ -12,7 +13,7 @@ internal class ReturnNullableTestCaseTest {
 
     @Test
     fun canApply_isTrue() {
-        val obj = ReturnNullableTestCase(objProperty, Method("nullable", "Any?"))
+        val obj = ReturnNullableTestCase(objProperty, Method("nullable", ReturnValue(className = "Any?")))
 
         val actual = obj.canApply()
 
@@ -21,7 +22,7 @@ internal class ReturnNullableTestCaseTest {
 
     @Test
     fun canApply_isFalse() {
-        val obj = ReturnNullableTestCase(objProperty, Method("nullable", "Any"))
+        val obj = ReturnNullableTestCase(objProperty, Method("nullable", ReturnValue(className = "Any")))
 
         val actual = obj.canApply()
 
@@ -30,7 +31,7 @@ internal class ReturnNullableTestCaseTest {
 
     @Test
     fun funSpecsTest() {
-        val obj = ReturnNullableTestCase(objProperty, Method("nullable", "Any?"))
+        val obj = ReturnNullableTestCase(objProperty, Method("nullable", ReturnValue(className = "Any?")))
 
         val expected = setOf(
             FunSpec.builder("nullable_isNullTest")
