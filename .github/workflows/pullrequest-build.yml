@@ -10,6 +10,8 @@ permissions:
 
 jobs:
   build:
+    permissions:
+      contents: write
     environment: prod
     runs-on: ubuntu-latest
     steps:
@@ -41,8 +43,6 @@ jobs:
   codecov:
     environment: prod
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
     steps:
       - uses: actions/checkout@v4
       - name: Upload coverage reports to Codecov
