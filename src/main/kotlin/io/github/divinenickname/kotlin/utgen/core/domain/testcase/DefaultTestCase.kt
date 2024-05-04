@@ -29,7 +29,7 @@ class DefaultTestCase(
             testMethodName = "${method.name}_notThrowTest",
             propertySpec = objProperty.toPropertySpec(),
             codeBlock = """
-            val expected = ${method.returnValue}()
+            val expected = ${method.returnValue.className()}()
             val actual = ${objProperty.toPropertySpec().name}.${method.name}()
             
             Assertions.assertEquals(expected, actual)

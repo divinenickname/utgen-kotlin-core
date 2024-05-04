@@ -17,7 +17,7 @@ import kotlin.jvm.Throws
 class OriginalClass(
     private val ctx: KotlinParser.KotlinFileContext,
     topLevelObjectIdx: Int = 0,
-): Class {
+) : Class {
 
     init {
         assert(topLevelObjectIdx < ctx.topLevelObject().size)
@@ -34,5 +34,19 @@ class OriginalClass(
     override fun simpleName(): String = topLevelCtx
         .declaration().classDeclaration().simpleIdentifier().text
 
-    override fun publicMethods(): Set<Method> = methodExtractor.methods
+    override fun publicMethods(): Set<Method>{
+        val imports = imports()
+        val methods = methodExtractor.methods
+
+        methods.map { method ->
+            imports.firstOrNull { it.contains(method.returnValue.className()) }
+                ?.let(method.returnValue::setPackageName)
+        }
+
+        return methods
+    }
+
+    override fun imports(): Set<String> = ctx.importList()?.importHeader()
+        ?.map { it.identifier().text }
+        ?.toSet() ?: emptySet()
 }

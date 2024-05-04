@@ -18,4 +18,9 @@ interface Class {
      * All class's public methods.
      */
     fun publicMethods(): Set<Method>
+
+    /**
+     * Import declarations
+     */
+    fun imports(): Set<String>
 }

@@ -1,7 +1,7 @@
 package io.github.divinenickname.kotlin.utgen.core.domain
 
 class ReturnValue(
-    private val packageName: String,
+    private var packageName: String,
     private var className: String,
 ) {
 
@@ -16,6 +16,9 @@ class ReturnValue(
     fun isNullable(): Boolean = isNullable
     fun className(): String = className
     fun packageName(): String = packageName
+    fun setPackageName(packageName: String) {
+        this.packageName = packageName
+    }
 
     override fun toString(): String = "$packageName.$className".takeIf { packageName.isNotEmpty() } ?: className
     override fun equals(other: Any?): Boolean {
