@@ -76,6 +76,31 @@ class UnitTestGeneratorTest {
         val path = Path.of("${RESOURCE_PATH}/RequireStmt.kt")
 
         val actual = UnitTestGenerator().generateAll(path).first().toString()
+        val expected = """
+            package io.github.divinenickname.kotlin.utgen.core
 
+            import org.junit.jupiter.api.Assertions
+            import org.junit.jupiter.api.Test
+
+            internal class RequireStmtTest {
+              @Test
+              public fun voidMethod_notThrowTest() {
+                val obj = RequireStmt()
+
+                Assertions.assertDoesNotThrow { obj.voidMethod() }
+              }
+
+              @Test
+              public fun voidMethod_requireStmt1() {
+                val obj = RequireStmt()
+
+                TODO('require(1==1)')
+                Assertions.assertThrows(IllegalArgumentException::class.java) { obj.result() }
+              }
+            }
+            
+        """.trimIndent()
+
+        actual shouldBe expected
     }
 }
