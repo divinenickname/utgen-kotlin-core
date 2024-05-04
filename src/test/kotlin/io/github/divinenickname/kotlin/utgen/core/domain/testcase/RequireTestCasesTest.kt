@@ -13,7 +13,7 @@ internal class RequireTestCasesTest {
 
     @Test
     fun canApply_isTrue() {
-        val obj = RequireTestCases(objProperty, Method("methodName", requireExpression = listOf("require(1==1)")))
+        val obj = RequireTestCases(objProperty, Method("methodName", requireExpression = listOf("1==1")))
 
         val actual = obj.canApply()
 
@@ -31,7 +31,7 @@ internal class RequireTestCasesTest {
 
     @Test
     fun funSpecsTest() {
-        val obj = RequireTestCases(objProperty, Method("methodName", requireExpression = listOf("require(1==1)", "require(false)")))
+        val obj = RequireTestCases(objProperty, Method("methodName", requireExpression = listOf("1==1", "false")))
 
         val expected = setOf(
             FunSpec.builder("methodName_requireStmt1")
@@ -50,6 +50,8 @@ internal class RequireTestCasesTest {
                 .build()
         )
         val actual = obj.funSpecs()
+
+        println(actual)
 
         Assertions.assertEquals(expected, actual)
     }

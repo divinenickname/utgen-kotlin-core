@@ -16,7 +16,10 @@ class MethodExtractor : KotlinParserBaseListener() {
                 val require = it.functionBody()?.block()?.statements()?.statement()
                     ?.mapNotNull { statement -> statement.requireCall()?.expression()?.text } ?: emptyList()
 
-                Method(name = ctx.simpleIdentifier().text, returnValue = ctx.type()?.text ?: "Unit")
+                Method(
+                    name = ctx.simpleIdentifier().text,
+                    returnValue = ctx.type()?.text ?: "Unit",
+                    requireExpression = require)
                     .apply(methods::add)
             }
     }

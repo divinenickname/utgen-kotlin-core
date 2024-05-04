@@ -41,4 +41,13 @@ class UnitTestGeneratorTest {
         actual["FizzClassTest"].toString() shouldBe File("${RESOURCE_PATH}/TwoClassesCase_FizzExpected.txt").readText()
         actual["BuzzClassTest"].toString() shouldBe File("${RESOURCE_PATH}/TwoClassesCase_BuzzExpected.txt").readText()
     }
+
+    @Test
+    fun generateAll_requireStmt() {
+        val path = Path.of("${RESOURCE_PATH}/RequireStmt.kt")
+
+        val actual = UnitTestGenerator().generateAll(path)
+
+        println()
+    }
 }

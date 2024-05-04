@@ -18,7 +18,7 @@ class RequireTestCases(
                 testMethodName = "${method.name}_requireStmt${index+1}",
                 propertySpec = objProperty.toPropertySpec(),
                 codeBlock = """
-                    TODO('$expression')
+                    TODO('require($expression)')
                     Assertions.assertThrows(IllegalArgumentException::class.java) { obj.result() }
                 """.trimIndent().let(CodeBlock::of)
             ).funSpec()
