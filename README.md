@@ -1,6 +1,6 @@
 [![GitHub license](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](https://www.apache.org/licenses/LICENSE-2.0)
 ![main branch build](https://github.com/divinenickname/utgen-kotlin-core/actions/workflows/mainbranch-build.yml/badge.svg)
-![Maven metadata URL](https://img.shields.io/maven-metadata/v?metadataUrl=https://repo1.maven.org/maven2/org/ilinykh/kotlin/logic-json-path/logic-json-path/maven-metadata.xml&style=flat&label=sonatype-central&color=green)
+![Maven metadata URL](https://img.shields.io/maven-metadata/v?metadataUrl=https://repo1.maven.org/maven2/io/github/divinenickname/kotlin/utgen/utgen-core/maven-metadata.xml&style=flat&label=sonatype-central&color=green)
 ![Maven Central Version](https://img.shields.io/maven-central/v/io.github.divinenickname.kotlin.utgen/utgen-core?style=flat&color=green)
 [![codecov](https://codecov.io/gh/divinenickname/utgen-kotlin-core/graph/badge.svg?token=4KI0YNW3RF)](https://codecov.io/gh/divinenickname/utgen-kotlin-core)
 ![Coverage](.github/badges/jacoco.svg)
