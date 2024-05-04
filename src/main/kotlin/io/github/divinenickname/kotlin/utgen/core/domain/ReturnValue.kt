@@ -1,9 +1,12 @@
 package io.github.divinenickname.kotlin.utgen.core.domain
 
 class ReturnValue(
-    private val packageName: String = "",
+    private val packageName: String,
     private var className: String,
 ) {
+
+    constructor(className: String) : this("", className)
+
     private val isNullable: Boolean = className.trim().last() == '?'
 
     init {
