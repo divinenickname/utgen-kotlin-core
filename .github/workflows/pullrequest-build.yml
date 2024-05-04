@@ -5,10 +5,13 @@ on:
     branches:
       - main
 
+permissions:
+  contents: read
+
 jobs:
   build:
     permissions:
-      contents: write
+      pull-requests: write
     environment: prod
     runs-on: ubuntu-latest
     steps:
