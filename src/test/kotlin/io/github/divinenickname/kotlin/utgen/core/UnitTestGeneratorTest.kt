@@ -75,8 +75,7 @@ class UnitTestGeneratorTest {
     fun generateAll_requireStmt() {
         val path = Path.of("${RESOURCE_PATH}/RequireStmt.kt")
 
-        val actual = UnitTestGenerator().generateAll(path)
+        val actual = UnitTestGenerator().generateAll(path).first().toString()
 
-        println()
     }
 }

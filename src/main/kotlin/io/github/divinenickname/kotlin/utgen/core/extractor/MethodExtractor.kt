@@ -20,7 +20,7 @@ class MethodExtractor : KotlinParserBaseListener() {
                 Method(
                     name = ctx.simpleIdentifier().text,
                     returnValue = ReturnValue(className = ctx.type()?.text ?: "Unit"),
-                    requireExpression = require
+                    requireExpressions = require
                 )
                     .apply(methods::add)
             }
