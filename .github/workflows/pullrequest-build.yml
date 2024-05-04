@@ -39,11 +39,11 @@ jobs:
           title: Code Coverage
           update-comment: true
 
-      - name: Print code-coverage
-        run: |
-          echo "coverage = ${{ steps.jacoco.outputs.coverage }}"
-          echo "branch coverage = ${{ steps.jacoco.outputs.branches }}"
-
+  codecov:
+    environment: prod
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v4.0.1
         with:
