@@ -41,15 +41,12 @@ class UnitTestGenerator {
         val fileSpecs = mutableListOf<FileSpec>()
 
         for (idx in 0..<ctx.topLevelObject().size) {
-            OriginalClass(ctx, idx).let(::TestClass).let {
-                FileSpec.builder(it.packageName(), it.simpleName())
-                    .addType(it.toTypeSpec())
+            OriginalClass(ctx, idx).let(::TestClass).let { testClass ->
+                FileSpec.builder(testClass.packageName(), testClass.simpleName())
+                    .addType(testClass.toTypeSpec())
                     .addImport("org.junit.jupiter.api", "Assertions")
+                    .also { builder -> testClass.imports().forEach { builder.addImport(it, "") } }
                     .build()
-                    .also {
-                        println()
-                    }
-
             }.also(fileSpecs::add)
         }
 

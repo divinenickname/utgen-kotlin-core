@@ -3,6 +3,7 @@ package io.github.divinenickname.kotlin.utgen.core.extractor
 import io.github.divinenickname.kotlin.utgen.core.antlr.KotlinParser
 import io.github.divinenickname.kotlin.utgen.core.antlr.KotlinParserBaseListener
 import io.github.divinenickname.kotlin.utgen.core.domain.Method
+import io.github.divinenickname.kotlin.utgen.core.domain.ReturnValue
 
 /**
  * ANTLR parser extractor. Find and aggregate public methods
@@ -18,8 +19,9 @@ class MethodExtractor : KotlinParserBaseListener() {
 
                 Method(
                     name = ctx.simpleIdentifier().text,
-                    returnValue = ctx.type()?.text ?: "Unit",
-                    requireExpression = require)
+                    returnValue = ReturnValue(className = ctx.type()?.text ?: "Unit"),
+                    requireExpression = require
+                )
                     .apply(methods::add)
             }
     }

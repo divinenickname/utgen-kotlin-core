@@ -3,6 +3,7 @@ package io.github.divinenickname.kotlin.utgen.core.domain.testcase
 import com.squareup.kotlinpoet.CodeBlock
 import com.squareup.kotlinpoet.FunSpec
 import io.github.divinenickname.kotlin.utgen.core.domain.Method
+import io.github.divinenickname.kotlin.utgen.core.domain.ReturnValue
 import io.github.divinenickname.kotlin.utgen.core.domain.kpoet.ObjectProperty
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
@@ -15,7 +16,7 @@ internal class ReturnBooleanTestCasesTest {
     @ParameterizedTest
     @ValueSource(strings = ["Boolean", "Boolean?"])
     fun canApply_isTrue(returnValue: String) {
-        val obj = ReturnBooleanTestCases(objProperty, Method("methodName", returnValue))
+        val obj = ReturnBooleanTestCases(objProperty, Method("methodName", ReturnValue(className = returnValue)))
 
         val actual = obj.canApply()
 
@@ -24,7 +25,7 @@ internal class ReturnBooleanTestCasesTest {
 
     @Test
     fun canApply_isFalse() {
-        val obj = ReturnBooleanTestCases(objProperty, Method("methodName", "Any"))
+        val obj = ReturnBooleanTestCases(objProperty, Method("methodName", ReturnValue(className = "Any")))
 
         val actual = obj.canApply()
 
@@ -33,7 +34,7 @@ internal class ReturnBooleanTestCasesTest {
 
     @Test
     fun funSpecsTest() {
-        val obj = ReturnBooleanTestCases(objProperty, Method("methodName", "Boolean"))
+        val obj = ReturnBooleanTestCases(objProperty, Method("methodName", ReturnValue(className = "Boolean")))
 
         val expected = setOf(
             FunSpec.builder("methodName_isTrue")

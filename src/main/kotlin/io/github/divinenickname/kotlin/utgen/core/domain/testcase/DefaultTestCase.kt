@@ -16,9 +16,9 @@ class DefaultTestCase(
 
     private val primitives = setOf("Byte", "Short", "Int", "Long", "Float", "Double", "Char", "Boolean", "String")
 
-    private fun isUnitType() = method.returnValue() == "Unit"
-    private fun isNullable() = method.isNullable()
-    private fun isPrimitive() = primitives.contains(method.returnValue())
+    private fun isUnitType() = method.returnValue.className() == "Unit"
+    private fun isNullable() = method.returnValue.isNullable()
+    private fun isPrimitive() = primitives.contains(method.returnValue.className())
 
     override fun canApply(): Boolean = !isUnitType() && !isPrimitive() && !(isPrimitive() && isNullable())
 
@@ -29,7 +29,7 @@ class DefaultTestCase(
             testMethodName = "${method.name}_notThrowTest",
             propertySpec = objProperty.toPropertySpec(),
             codeBlock = """
-            val expected = ${method.returnValue()}()
+            val expected = ${method.returnValue.className()}()
             val actual = ${objProperty.toPropertySpec().name}.${method.name}()
             
             Assertions.assertEquals(expected, actual)

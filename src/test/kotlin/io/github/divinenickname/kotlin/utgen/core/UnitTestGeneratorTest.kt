@@ -43,6 +43,35 @@ class UnitTestGeneratorTest {
     }
 
     @Test
+    fun generateAll_checkExternalImports() {
+        val path = Path.of("${RESOURCE_PATH}/ClassWithExternalImports.txt")
+
+        val actual = UnitTestGenerator().generateAll(path).first().toString()
+        val expected = """
+            package io.github.divinenickname.kotlin.utgen.core
+
+            import org.example.MyClass
+            import org.junit.jupiter.api.Assertions
+            import org.junit.jupiter.api.Test
+
+            internal class ClassWithExternalImportsTest {
+              @Test
+              public fun method_notThrowTest() {
+                val obj = ClassWithExternalImports()
+
+                val expected = MyClass()
+                val actual = obj.method()
+
+                Assertions.assertEquals(expected, actual)
+              }
+            }
+            
+        """.trimIndent()
+
+        actual shouldBe expected
+    }
+
+    @Test
     fun generateAll_requireStmt() {
         val path = Path.of("${RESOURCE_PATH}/RequireStmt.kt")
 

@@ -1,0 +1,8 @@
+package io.github.divinenickname.kotlin.utgen.core
+
+class ClassWithoutExternalImports {
+
+    fun method(): String {
+        return ""
+    }
+}

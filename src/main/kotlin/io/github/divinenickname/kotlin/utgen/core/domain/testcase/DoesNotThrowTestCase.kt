@@ -13,7 +13,7 @@ class DoesNotThrowTestCase(
     private val method: Method,
 ) : TestCase(objProperty, method) {
 
-    override fun canApply(): Boolean = method.returnValue() == "Unit"
+    override fun canApply(): Boolean = method.returnValue.className() == "Unit"
 
     override fun funSpecs(): Set<FunSpec> {
         if (!canApply()) return emptySet()

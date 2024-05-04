@@ -12,7 +12,7 @@ class ReturnPrimitiveTestCases(
 
     private val primitives = setOf("Byte", "Short", "Int", "Long", "Float", "Double", "Char", "String")
 
-    override fun canApply(): Boolean = primitives.contains(method.returnValue())
+    override fun canApply(): Boolean = primitives.contains(method.returnValue.className())
 
     override fun funSpecs(): Set<FunSpec> {
         if (!canApply()) return emptySet()
@@ -21,7 +21,7 @@ class ReturnPrimitiveTestCases(
             testMethodName = "${method.name}Test",
             propertySpec = objProperty.toPropertySpec(),
             codeBlock = """
-            val expected: ${method.returnValue()} = TODO('${method.returnValue().lowercase()}')
+            val expected: ${method.returnValue.className()} = TODO('${method.returnValue.className().lowercase()}')
             val actual = ${objProperty.toPropertySpec().name}.${method.name}()
             
             Assertions.assertEquals(expected, actual)

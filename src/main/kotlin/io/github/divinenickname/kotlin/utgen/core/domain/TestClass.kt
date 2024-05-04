@@ -27,7 +27,7 @@ class TestClass(
         originalClassName = originalClass.simpleName(),
         packageName = originalClass.packageName(),
         className = "${originalClass.simpleName()}Test",
-        publicMethods = originalClass.publicMethods()
+        publicMethods = originalClass.publicMethods(),
     )
 
     private val objProperty = ObjectProperty(packageName, originalClassName)
@@ -52,4 +52,8 @@ class TestClass(
     override fun simpleName(): String = className
 
     override fun publicMethods(): Set<Method> = publicMethods
+
+    override fun imports(): Set<String> = publicMethods()
+        .filter { it.returnValue.packageName().isNotEmpty() }
+        .map { it.returnValue.packageName() }.toSet()
 }
