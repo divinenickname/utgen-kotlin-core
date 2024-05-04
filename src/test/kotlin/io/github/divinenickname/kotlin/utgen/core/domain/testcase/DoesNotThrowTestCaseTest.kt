@@ -3,6 +3,7 @@ package io.github.divinenickname.kotlin.utgen.core.domain.testcase
 import com.squareup.kotlinpoet.CodeBlock
 import com.squareup.kotlinpoet.FunSpec
 import io.github.divinenickname.kotlin.utgen.core.domain.Method
+import io.github.divinenickname.kotlin.utgen.core.domain.ReturnValue
 import io.github.divinenickname.kotlin.utgen.core.domain.kpoet.ObjectProperty
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
@@ -13,7 +14,7 @@ internal class DoesNotThrowTestCaseTest {
 
     @Test
     fun canApply_isTrue() {
-        val obj = DoesNotThrowTestCase(objProperty, Method("methodName", "Unit"))
+        val obj = DoesNotThrowTestCase(objProperty, Method("methodName", ReturnValue(className = "Unit")))
 
         val actual = obj.canApply()
 
@@ -22,7 +23,7 @@ internal class DoesNotThrowTestCaseTest {
 
     @Test
     fun canApply_isFalse() {
-        val obj = DoesNotThrowTestCase(objProperty, Method("methodName", "String"))
+        val obj = DoesNotThrowTestCase(objProperty, Method("methodName", ReturnValue(className = "String")))
 
         val actual = obj.canApply()
 
@@ -31,7 +32,7 @@ internal class DoesNotThrowTestCaseTest {
 
     @Test
     fun funSpecsTest() {
-        val obj = DoesNotThrowTestCase(objProperty, Method("methodName", "Unit"))
+        val obj = DoesNotThrowTestCase(objProperty, Method("methodName", ReturnValue(className = "Unit")))
 
         val expected = setOf(
             FunSpec.builder("methodName_notThrowTest")

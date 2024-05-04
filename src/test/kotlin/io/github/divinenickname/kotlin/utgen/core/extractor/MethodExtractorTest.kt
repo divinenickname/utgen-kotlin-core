@@ -3,6 +3,7 @@ package io.github.divinenickname.kotlin.utgen.core.extractor
 import io.github.divinenickname.kotlin.utgen.core.antlr.KotlinLexer
 import io.github.divinenickname.kotlin.utgen.core.antlr.KotlinParser
 import io.github.divinenickname.kotlin.utgen.core.domain.Method
+import io.github.divinenickname.kotlin.utgen.core.domain.ReturnValue
 import io.kotest.matchers.collections.shouldContainAll
 import org.antlr.v4.runtime.CharStreams
 import org.antlr.v4.runtime.CommonTokenStream
@@ -17,9 +18,9 @@ class MethodExtractorTest {
     @Test
     fun checkMethods() {
         val expected = setOf(
-            Method("voidMethod"),
-            Method("publicScopeMethod"),
-            Method("nonVoidMethod", "String"),
+            Method("voidMethod", ReturnValue("", "Unit")),
+            Method("publicScopeMethod", ReturnValue("", "Unit")),
+            Method("nonVoidMethod", ReturnValue(className = "String")),
         )
 
         val lexer = KotlinLexer(CharStreams.fromString(input))

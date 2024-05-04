@@ -10,22 +10,22 @@ class MethodTest {
     @ParameterizedTest
     @ValueSource(strings = ["String?", "String? "])
     fun isNullable_true(returnType: String) {
-        val obj = Method("abc", returnType)
+        val obj = Method("abc", ReturnValue(className = returnType))
 
-        obj.isNullable() shouldBe true
+        obj.returnValue.isNullable() shouldBe true
     }
 
     @Test
     fun isNullable_false() {
-        val obj = Method("abc", "String")
+        val obj = Method("abc", ReturnValue(className = "String"))
 
-        obj.isNullable() shouldBe false
+        obj.returnValue.isNullable() shouldBe false
     }
 
     @Test
     fun returnValue_nullable() {
-        val obj = Method("abc", "String?")
+        val obj = Method("abc", ReturnValue(className = "String?"))
 
-        obj.returnValue() shouldBe "String"
+        obj.returnValue.className() shouldBe "String"
     }
 }
