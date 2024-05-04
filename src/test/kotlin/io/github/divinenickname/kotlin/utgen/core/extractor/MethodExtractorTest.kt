@@ -27,7 +27,6 @@ class MethodExtractorTest {
         val parser = KotlinParser(CommonTokenStream(lexer))
 
         val kotlinFileContext = parser.kotlinFile()
-        println(kotlinFileContext.toStringTree())
         val methodExtractor = MethodExtractor()
 
         ParseTreeWalker().walk(methodExtractor, kotlinFileContext)

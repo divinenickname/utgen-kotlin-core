@@ -17,6 +17,7 @@ class TestCaseProcessor(
         ::ReturnPrimitiveTestCases,
         ::DoesNotThrowTestCase,
         ::DefaultTestCase,
+        ::RequireTestCases,
     ).map { it(objProperty, method) }
 
     /**

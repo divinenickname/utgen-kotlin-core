@@ -14,9 +14,13 @@ class MethodExtractor : KotlinParserBaseListener() {
     override fun enterFunctionDeclaration(ctx: KotlinParser.FunctionDeclarationContext) {
         ctx.takeIf { it.modifiers() == null || it.modifiers().text != "private" }
             ?.let {
+                val require = it.functionBody()?.block()?.statements()?.statement()
+                    ?.mapNotNull { statement -> statement.requireCall()?.expression()?.text } ?: emptyList()
+
                 Method(
                     name = ctx.simpleIdentifier().text,
-                    returnValue = ReturnValue(className = ctx.type()?.text ?: "Unit")
+                    returnValue = ReturnValue(className = ctx.type()?.text ?: "Unit"),
+                    requireExpressions = require
                 )
                     .apply(methods::add)
             }
