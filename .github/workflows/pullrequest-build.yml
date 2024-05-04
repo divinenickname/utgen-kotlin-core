@@ -22,10 +22,13 @@ jobs:
           java-version: 17
           distribution: 'adopt'
 
-      - name: Build
-        run: ./gradlew build
+      - name: Building
+        run: ./gradlew build -x test
 
-      - name: Add coverage to PR
+      - name: Unit-testing
+        run: ./gradlew test
+
+      - name: Adding coverage to Pull-Request
         uses: madrapps/jacoco-report@v1.6.1
         with:
           paths: |
@@ -36,7 +39,7 @@ jobs:
           title: Code Coverage
           update-comment: true
 
-      - name: Log coverage percentage
+      - name: Print code-coverage
         run: |
           echo "coverage = ${{ steps.jacoco.outputs.coverage }}"
           echo "branch coverage = ${{ steps.jacoco.outputs.branches }}"
