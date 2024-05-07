@@ -55,7 +55,7 @@ internal class RequireTestCasesTest {
                 .addCode(
                     """
                     TODO('require(1==1)')
-                    Assertions.assertThrows(IllegalArgumentException::class.java) { obj.result() }""".trimIndent()
+                    Assertions.assertThrows(IllegalArgumentException::class.java) { obj.methodName() }""".trimIndent()
                         .let(CodeBlock::of)
                 )
                 .build(),
@@ -65,7 +65,7 @@ internal class RequireTestCasesTest {
                 .addCode(
                     """
                     TODO('require(false)')
-                    Assertions.assertThrows(IllegalArgumentException::class.java) { obj.result() }""".trimIndent()
+                    Assertions.assertThrows(IllegalArgumentException::class.java) { obj.methodName() }""".trimIndent()
                         .let(CodeBlock::of)
                 )
                 .build()

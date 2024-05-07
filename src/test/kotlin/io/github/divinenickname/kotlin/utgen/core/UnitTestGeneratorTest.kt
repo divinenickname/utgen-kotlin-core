@@ -95,7 +95,7 @@ class UnitTestGeneratorTest {
                 val obj = RequireStmt()
 
                 TODO('require(1==1)')
-                Assertions.assertThrows(IllegalArgumentException::class.java) { obj.result() }
+                Assertions.assertThrows(IllegalArgumentException::class.java) { obj.voidMethod() }
               }
             }
             
